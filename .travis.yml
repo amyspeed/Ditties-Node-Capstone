@@ -2,3 +2,10 @@ language: node_js
 node_js: node
 services:
 - mongodb
+deploy:
+  provider: heroku
+  api_key:
+    secure: OQ01j4TKBhakFcDtD0dSfMWbiOD7MFHNmPuAqoxi89Mtk7f1SE04IQrOqG9/qqVrbXJlx+Ak7At2K+vC3FoiBr2Y4hmAxQ3aKQylKY9Iz1Y8Zr1Bhjs/fE9uUKAR+VYx2hJa+1rtNqoDaqpZ5esTGKX7trSKVzkhi1+hIqvr/YLDeoDy80ou9xs8mi54tDcse79MKsRWioMaLUrQOTHa2/VLlVXkc5AmHLTjk8tiY2EpmbtCY6t8rUgdy89rBBlrhDDpPEgJsONp4qX4SyctdyVaPrJ8iTd2Nhoz29o4V27ccyF00SY9wS5YOpC8CpLoOi5oo4HrkeM+ViEJJCJfPXp9NW0lRIcLc/k/3F2AxduhAWLPQ5J+GFsEf9hhRq6NL5lVxSIvon6TCs9ASkA2AXLAU7YMYvza6k5FO3qrwOlZkq+gvGmuwiohW2Fki9FhrZv0G4r0oupHDRn18XY18s338muDYQko/LM3zsFxkWmkKmsx6Le4r9nEZiufiwMNLGR2Nd+XFpkY2yPvagtDZ0N/mkEH65S3sHpBwkic2AN4HlgvDBtBfLdv4Fa/MlEDg2nLK3p7FaUlIWSpbLyCTXtkiX8fNNg2Doq64k4GF4DHN1y6uuYCyAgaTDRMtJQww3pK1ueoBZUBw9kdxWfCvoSw36iCn+s47WlfVNWfess=
+  app: cryptic-atoll-45082
+  on:
+    repo: amyspeed/Diddies-Node-Capstone
