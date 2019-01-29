@@ -2,7 +2,7 @@
   "name": "diddies-node-capstone",
   "version": "1.0.0",
   "description": "The app for songwriters' notes",
-  "main": "index.html",
+  "main": "html/index.html",
   "dependencies": {
     "express": "^4.16.4"
   },
