@@ -21,7 +21,7 @@
             <div class="row">
                 <div class="col-12">
                     <h2>Let your song ideas come to life!</h2>
-                    <form>
+                    <form class="song-form">
                         <fieldset>
                             <legend>Fill in all inspired fields</legend>
                             <label for="title">Title</label>
@@ -58,9 +58,10 @@
                             <label for="notes">Other Misc. Notes</label>
                             <input type="text" id="notes"><br>
                             
-                            <label for="section1">Section</label>
-                            <input type="number" min="1" max="10" id="section-sort">
-                            <select id="section1">
+                            <div class="content">
+                                <label for="section1">Section</label>
+                                <input type="number" min="1" max="10" id="sectionId">
+                                <select id="section1">
                                     <option value="">none selected</option>
                                     <option value="intro">Intro</option>
                                     <option value="verse">Verse</option>
@@ -68,110 +69,10 @@
                                     <option value="bridge">Bridge</option>
                                     <option value="instrumental">Instrumental</option>
                                 </select><br>
-                            <input type="submit" value="create section">
+                            </div>   
+                                <input type="submit" value="create section" class="new-section">
                             
-                            <!--<label for=chords1>Chords</label>
-                            <input type="text" id="chords1"><br>
-
-                            <label for=lyrics1>Lyrics</label>
-                            <input type="text" id="lyrics1"><br>
-
-                            <label for="section2">Section</label>
-                            <select id="section2">
-                                    <option value="">none selected</option>
-                                    <option value="intro">Intro</option>
-                                    <option value="verse">Verse</option>
-                                    <option value="chorus">Chorus</option>
-                                    <option value="bridge">Bridge</option>
-                                    <option value="instrumental">Instrumental</option>
-                                </select><br>
                             
-                            <label for=chords2>Chords</label>
-                            <input type="text" id="chords2"><br>
-
-                            <label for=lyrics2>Lyrics</label>
-                            <input type="text" id="lyrics2"><br>
-
-                            <label for="section3">Section</label>
-                            <select id="section3">
-                                    <option value="">none selected</option>
-                                    <option value="intro">Intro</option>
-                                    <option value="verse">Verse</option>
-                                    <option value="chorus">Chorus</option>
-                                    <option value="bridge">Bridge</option>
-                                    <option value="instrumental">Instrumental</option>
-                                </select><br>
-                            
-                            <label for=chords3>Chords</label>
-                            <input type="text" id="chords3"><br>
-
-                            <label for=lyrics3>Lyrics</label>
-                            <input type="text" id="lyrics3"><br>
-
-                            <label for="section4">Section</label>
-                            <select id="section4">
-                                    <option value="">none selected</option>
-                                    <option value="intro">Intro</option>
-                                    <option value="verse">Verse</option>
-                                    <option value="chorus">Chorus</option>
-                                    <option value="bridge">Bridge</option>
-                                    <option value="instrumental">Instrumental</option>
-                                </select><br>
-                            
-                            <label for=chords4>Chords</label>
-                            <input type="text" id="chords4"><br>
-
-                            <label for=lyrics4>Lyrics</label>
-                            <input type="text" id="lyrics4"><br>
-                            
-                            <label for="section5">Section</label>
-                            <select id="section5">
-                                    <option value="">none selected</option>
-                                    <option value="intro">Intro</option>
-                                    <option value="verse">Verse</option>
-                                    <option value="chorus">Chorus</option>
-                                    <option value="bridge">Bridge</option>
-                                    <option value="instrumental">Instrumental</option>
-                                </select><br>
-                            
-                            <label for=chords5>Chords</label>
-                            <input type="text" id="chords5"><br>
-
-                            <label for=lyrics5>Lyrics</label>
-                            <input type="text" id="lyrics5"><br>
-                            
-                            <label for="section6">Section</label>
-                            <select id="section6">
-                                    <option value="">none selected</option>
-                                    <option value="intro">Intro</option>
-                                    <option value="verse">Verse</option>
-                                    <option value="chorus">Chorus</option>
-                                    <option value="bridge">Bridge</option>
-                                    <option value="instrumental">Instrumental</option>
-                                </select><br>
-                            
-                            <label for=chords6>Chords</label>
-                            <input type="text" id="chords6"><br>
-
-                            <label for=lyrics6>Lyrics</label>
-                            <input type="text" id="lyrics6"><br>
-                            
-                            <label for="section7">Section</label>
-                            <select id="section7">
-                                    <option value="">none selected</option>
-                                    <option value="intro">Intro</option>
-                                    <option value="verse">Verse</option>
-                                    <option value="chorus">Chorus</option>
-                                    <option value="bridge">Bridge</option>
-                                    <option value="instrumental">Instrumental</option>
-                                </select><br>
-                            
-                            <label for=chords7>Chords</label>
-                            <input type="text" id="chords7"><br>
-
-                            <label for=lyrics7>Lyrics</label>
-                            <input type="text" id="lyrics7"><br>
-                            -->
                             <br>
                             <input type="submit" value="Save">
                             <input type="submit" value="Clear Form">
@@ -181,6 +82,9 @@
             </div>
         </div>
     </main>
+    
+    <script type="text/javascript" src="js/songform.js"></script>
+
 </body>
 
 
