@@ -12,7 +12,7 @@ describe('Open landing page', function() {
     it('should open index.html', function() {
         return chai
             .request(app)
-            .get('/html')
+            .get('/')
             .then(function(res) {
                 expect(res).to.have.status(200);
             });
@@ -23,7 +23,7 @@ describe('Open page to create new user credentials', function() {
     it('should open signup.html', function() {
         return chai
             .request(app)
-            .get('/html/signup.html')
+            .get('/signup.html')
             .then(function(res) {
                 expect(res).to.have.status(200);
             });
@@ -34,7 +34,7 @@ describe('Open user dashboard', function() {
     it('should open dash.html', function() {
         return chai
             .request(app)
-            .get('/html/dash.html')
+            .get('/dash.html')
             .then(function(res) {
                 expect(res).to.have.status(200);
             });
@@ -45,7 +45,7 @@ describe('Open song form', function() {
     it ('should open songform.html', function() {
         return chai
             .request(app)
-            .get('/html/songform.html', function(res) {
+            .get('/songform.html', function(res) {
                 expect(res).to.have.status(200);
             });
     });
@@ -55,7 +55,7 @@ describe('Open one existing song', function() {
     it('should open song.html', function() {
         return chai 
             .request(app) 
-            .get('/html/song.html', function(res) {
+            .get('/song.html', function(res) {
                 expect(res).to.have.status(200);
             });
     });
