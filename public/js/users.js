@@ -22,26 +22,26 @@ let MOCK_USERS = {
 
         }
     ]
-}
+};
 
-//This funtion to be replaced with AJAX calls to server
+//This function to be replaced with AJAX calls to server
 
-function getUser(callbackFn) {
+function getUsers(callbackFn) {
     setTimeout(function(){ callbackFn(MOCK_USERS)}, 1);
 }
 
-function displayUser(data) {
-    for (index in data.songs) {
+function displayUsers(data) {
+    for (index in data.users) {
         $('body').append(
             `<p>${data.users[index].name.firstName}</p>`
         );
     }
 }
 
-function getAndDisplayUser() {
-    getUser(displayUser);
+function getAndDisplayUsers() {
+    getUsers(displayUsers);
 }
 
 $(function() {
-    getAndDisplayUser();
+    getAndDisplayUsers();
 })
