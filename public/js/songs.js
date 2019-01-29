@@ -88,7 +88,7 @@ let MOCK_SONGS = {
     ]
 };
 
-//This fuction to be replaced with AJAX calls to server
+//This function to be replaced with AJAX calls to server
 function getSongs(callbackFn) {
     setTimeout(function(){ callbackFn(MOCK_SONGS)}, 1);
 }
@@ -96,7 +96,7 @@ function getSongs(callbackFn) {
 function displaySongs(data) {
     for (index in data.songs) {
         $('body').append(
-            '<p>' + data.songs[index].title + '</p>'
+            `<p>${data.songs[index].title}</p>`
         );
     }
 }
