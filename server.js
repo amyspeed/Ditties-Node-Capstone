@@ -14,7 +14,7 @@ app.use(morgan('common'));
 app.use(express.json());
 app.use(express.static('public'));
 
-
+//Get all
 app.get('/ditties', (req, res) => {
     Dittie
         .find()
@@ -27,6 +27,18 @@ app.get('/ditties', (req, res) => {
         });
 });
 
+//Get by id
+app.get('/ditties/:id', (req, res) => {
+    Dittie
+        .findById(req.params.id)
+        .then(ditty => res.json(ditty))
+        .catch(err => {
+            console.error(err);
+            res.status(500).json({ error: 'something went wrong' });
+        });
+});
+
+//Post
 app.post('/ditties', (req, res) => {
     const requiredFields = ['title', 'userName'];
     for (let i = 0; i < requiredFields.length; i++) {
@@ -48,6 +60,23 @@ app.post('/ditties', (req, res) => {
             console.error(err);
             res.status(500).json({ error: 'Somthing went wrong' });
         });
+});
+
+//Put
+
+//Delete
+app.delete('/ditties/:id', (req, res) => {
+    Dittie
+        .findByIdAndRemove(req.params.id)
+        .then(() => {
+            console.log(`Deleted song with id ${req.params.id}`);
+            res.status(204).end();
+        });
+});
+
+
+app.use('*', function (req, res) {
+    res.status(404).json({ message: `Not Found` });
 });
 
 
