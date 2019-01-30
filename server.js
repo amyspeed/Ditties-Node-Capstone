@@ -40,7 +40,8 @@ app.post('/ditties', (req, res) => {
 
     Dittie
         .create({
-            title: req.body.title
+            title: req.body.title,
+            userName: req.body.userName
         })
         .then(ditty => res.status(201).json(ditty.serialize()))
         .catch(err => {
