@@ -1,26 +1,3 @@
-
-//This function to be replaced with AJAX calls to server
-function getSongs(callbackFn) {
-    setTimeout(function(){ callbackFn(MOCK_SONGS)}, 1);
-}
-
-function displaySongs(data) {
-    for (index in data.songs) {
-        $('.song-icons').append(
-            `<p>${data.songs[index].title}</p>`
-        );
-        
-    }
-}
-
-function getAndDisplaySongs() {
-    getSongs(displaySongs);
-}
-
-$(function() {
-    getAndDisplaySongs();
-})
-
 //This function to be replaced with AJAX calls to server
 
 function getUser(callbackFn) {
@@ -49,5 +26,38 @@ function handleNewSong() {
         window.location.href = 'songform.html';
     })
 }
+
+//This function to be replaced with AJAX calls to server
+function getSongs(callbackFn) {
+    setTimeout(function(){ callbackFn(MOCK_SONGS)}, 1);
+}
+
+function displaySongs(data) {
+    for (index in data.songs) {
+        $('.song-icons').append(
+            `<button id="title">${data.songs[index].title}<button>`
+        );
+        let title = data.songs[index].title
+        handleSongButtons(title);
+    }
+}
+
+function getAndDisplaySongs() {
+    getSongs(displaySongs);
+}
+
+function handleSongButtons(title) {
+    $('#title').click(function(event) {
+        event.preventDefault();
+        console.log(title);
+        //handle data here
+        //window.location.href = "song.html";
+        window.open('song.html');
+    })
+}
+
+$(function() {
+    getAndDisplaySongs();
+})
 
 handleNewSong();
