@@ -61,6 +61,11 @@ function permDelete() {
     //Delete data!!
 }
 
+function handleClear() {
+    //code here
+}
+
+handleClear();
 handleDelete();
 handleSave();
 handleSection();
