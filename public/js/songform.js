@@ -27,4 +27,40 @@ function appendContent() {
         </select><br>`)
 }
 
+function handleSave() {
+    $('.song-form').on('click', '#save', function(event) {
+        event.preventDefault();
+        generateSong();
+    })
+}
+
+function generateSong() {
+    window.location.href = 'song.html';
+    //Post song Data
+}
+
+function handleDelete() {
+    $('.song-form').on('click', '#delete', function(event) {
+        event.preventDefault();
+        getConfirmation();
+    })
+}
+
+function getConfirmation() {
+    let deleteConfirm = confirm('Are you sure you want to perminently delete this Diddy?');
+    if( deleteConfirm == true ) {
+        permDelete();
+    }
+    else {
+        return false;
+    }
+}
+
+function permDelete() {
+    window.location.href = 'dash.html';
+    //Delete data!!
+}
+
+handleDelete();
+handleSave();
 handleSection();
