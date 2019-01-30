@@ -15,6 +15,41 @@ app.use(express.json());
 app.use(express.static('public'));
 
 
+app.get('/ditties', (req, res) => {
+    Dittie
+        .find()
+        .then(ditties => {
+            res.json(ditties.map(ditty => ditty.serialize()));
+        })
+        .catch(err => {
+            console.error(err);
+            res.status(500).json({ error: 'Oops! Something went wrong' });
+        });
+});
+
+app.post('/ditties', (req, res) => {
+    const requiredFields = ['title', 'userName'];
+    for (let i = 0; i < requiredFields.length; i++) {
+        const field = requiredFields[i];
+        if (!(field in req.body)) {
+            const message = `Missing ${field} in request body`;
+            console.error(message);
+            return res.status(400).send(message);
+        }
+    }
+
+    Dittie
+        .create({
+            title: req.body.title
+        })
+        .then(ditty => res.status(201).json(ditty.serialize()))
+        .catch(err => {
+            console.error(err);
+            res.status(500).json({ error: 'Somthing went wrong' });
+        });
+});
+
+
 
 let server;
 
