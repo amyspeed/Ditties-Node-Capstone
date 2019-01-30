@@ -50,13 +50,3 @@ describe('Open song form', function() {
             });
     });
 });
-
-describe('Open one existing song', function() {
-    it('should open song.html', function() {
-        return chai 
-            .request(app) 
-            .get('/song.html', function(res) {
-                expect(res).to.have.status(200);
-            });
-    });
-});
