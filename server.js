@@ -19,7 +19,7 @@ app.get('/ditties', (req, res) => {
     Dittie
         .find()
         .then(ditties => {
-            res.json(ditties.map(ditty => ditty.serialize()));
+            res.json(ditties);//.map(ditty => ditty.serialize()));
         })
         .catch(err => {
             console.error(err);
@@ -40,7 +40,7 @@ app.get('/ditties/:id', (req, res) => {
 
 //Post
 app.post('/ditties', (req, res) => {
-    const requiredFields = ['title', 'userName'];
+    const requiredFields = ['title'];
     for (let i = 0; i < requiredFields.length; i++) {
         const field = requiredFields[i];
         if (!(field in req.body)) {
@@ -53,9 +53,34 @@ app.post('/ditties', (req, res) => {
     Dittie
         .create({
             title: req.body.title,
-            userName: req.body.userName
-        })
-        .then(ditty => res.status(201).json(ditty.serialize()))
+            coauthors: req.body.coauthors,
+            genreFeel: req.body.genreFeel,
+            speed: req.body.speed,
+            key: req.body.key,
+            capo: req.body.capo,
+            timeSig: {
+                top: req.body.timeSig.top,
+                bottom: req.body.timeSig.bottom
+            },
+            strum: req.body.strum,
+            notes: req.body.notes,
+            content: [
+                {
+                sectionId: req.body.content.sectionId,
+                section: req.body.content.section,
+                chords: req.body.content.chords,
+                lyrics: req.body.content.lyrics
+                },
+                {
+                sectionId: req.body.content.sectionId,
+                section: req.body.content.section,
+                chords: req.body.content.chords,
+                lyrics: req.body.content.lyrics
+                }
+            ]    
+            })
+
+        .then(ditty => res.status(201).json(ditty))//.serialize()))
         .catch(err => {
             console.error(err);
             res.status(500).json({ error: 'Somthing went wrong' });
@@ -63,6 +88,31 @@ app.post('/ditties', (req, res) => {
 });
 
 //Put
+app.put('/ditties/:id', (req, res) => {
+    if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
+        res.status(400).json({
+            error: `Request path id and request body id values must match`
+        });
+    }
+
+    const updated = {};
+    const updateableFields = ['title'];
+    updateableFields.forEach(field => {
+        if (field in req.body) {
+            updated[field] = req.body[field];
+        }
+    });
+
+    Dittie
+        .findByIdAndUpdate(req.params.id, { $set: updated })
+        .then(() => {
+            res.status(204).end();
+        })
+        .catch(err => {
+            console.error(err);
+            res.status(500).json({ message: 'Something went wrong' });
+        });
+});
 
 //Delete
 app.delete('/ditties/:id', (req, res) => {
@@ -71,6 +121,10 @@ app.delete('/ditties/:id', (req, res) => {
         .then(() => {
             console.log(`Deleted song with id ${req.params.id}`);
             res.status(204).end();
+        })
+        .catch(err => {
+            console.error(err);
+            res.status(500).json({ messaage: 'Internal server error' });
         });
 });
 
