@@ -8,6 +8,8 @@ const passport = require('passport');
 
 mongoose.Promise = global.Promise;
 
+const { router: usersRouter } = require('./users');
+const { router: authRouter, localStrategy, jwtStrategy } = require('.auth');
 const { DATABASE_URL, PORT } = require('./config');
 const { Dittie } = require('./models');
 
@@ -16,6 +18,12 @@ const app = express();
 app.use(morgan('common'));
 app.use(express.json());
 app.use(express.static('public'));
+
+passport.use(localStrategy);
+passport.use(jwtStrategy);
+
+app.use('/api/users/', usersRouter);
+app.use('/api/auth', authRouter);
 
 //Get all
 app.get('/ditties', (req, res) => {
