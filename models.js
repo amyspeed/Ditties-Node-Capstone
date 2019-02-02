@@ -3,6 +3,13 @@
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
+const contentSchema = mongoose.Schema({
+    sectionId: Number,
+    section: String,
+    chords: String,
+    lyrics: String
+});
+
 const dittySchema = mongoose.Schema({
     user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
     title: { type: String, required: true },
@@ -17,14 +24,7 @@ const dittySchema = mongoose.Schema({
     },
     strum: { type: String },
     notes: { type: String },
-    content: [
-        {
-            sectionId: Number,
-            section: String,
-            chords: String,
-            lyrics: String
-        }
-    ],    
+    content: [contentSchema],    
     created: { type: Date, default: Date.now }
 });
 

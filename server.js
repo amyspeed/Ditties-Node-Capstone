@@ -51,35 +51,14 @@ app.post('/ditties', (req, res) => {
     }
 
     Dittie
-        .create({
-            title: req.body.title,
-            coauthors: req.body.coauthors,
-            genreFeel: req.body.genreFeel,
-            speed: req.body.speed,
-            key: req.body.key,
-            capo: req.body.capo,
-            timeSig: {
-                top: req.body.timeSig.top,
-                bottom: req.body.timeSig.bottom
-            },
-            strum: req.body.strum,
-            notes: req.body.notes,
-            content: [
-                {
-                sectionId: req.body.content.sectionId,
-                section: req.body.content.section,
-                chords: req.body.content.chords,
-                lyrics: req.body.content.lyrics
-                },
-                {
-                sectionId: req.body.content.sectionId,
-                section: req.body.content.section,
-                chords: req.body.content.chords,
-                lyrics: req.body.content.lyrics
-                }
-            ]    
-            })
-
+        .create(req.body)
+        .then(ditty=> {
+            ditty.content = [];
+            req.body.content.forEach((content)=>{
+              ditty.content.push(content);    
+            });
+            return ditty.save();
+          })
         .then(ditty => res.status(201).json(ditty))//.serialize()))
         .catch(err => {
             console.error(err);
