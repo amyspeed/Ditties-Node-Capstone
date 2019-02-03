@@ -37,7 +37,7 @@ const localStrategy = new LocalStrategy((username, password, callback) => {
         });
 });
 
-const JwtStrategy = new JwtStrategy(
+const jwtStrategy = new JwtStrategy(
     {
         secretOrKey: JWT_SECRET,
         //Bearer auth header
@@ -50,4 +50,4 @@ const JwtStrategy = new JwtStrategy(
     }
 );
 
-module.exports = { localStrategy, JwtStrategy };
+module.exports = { localStrategy, jwtStrategy };

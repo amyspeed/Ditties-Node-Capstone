@@ -5,7 +5,7 @@ const passport = require('passport');
 const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
 
-const jwt = require('..config');
+const config = require('../config');
 const router = express.Router();
 
 const createAuthToken = function(user) {
@@ -23,4 +23,13 @@ router.use(bodyParser.json());
 router.post('/login', localAuth, (req, res) => {
     const authToken = createAuthToken(req.user.serialize());
     res.json({ authToken });
-})
+});
+
+const jwtAuth = passport.authenticate('jwt', { session: false });
+
+router.post('/refresh', jwtAuth, (req, res) => {
+    const authToken = createAuthToken(req.user);
+    res.json({ authToken });
+});
+
+module.exports = { router };

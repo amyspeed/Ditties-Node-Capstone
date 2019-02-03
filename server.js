@@ -2,16 +2,17 @@
 
 require('dotenv').config();
 const express = require('express');
-const morgan = require('morgan');
 const mongoose = require('mongoose');
+const morgan = require('morgan');
 const passport = require('passport');
+
+const { router: usersRouter } = require('./users');
+const { router: authRouter, localStrategy, jwtStrategy } = require('./auth');
+const { Dittie } = require('./models');
 
 mongoose.Promise = global.Promise;
 
-const { router: usersRouter } = require('./users');
-const { router: authRouter, localStrategy, jwtStrategy } = require('.auth');
 const { DATABASE_URL, PORT } = require('./config');
-const { Dittie } = require('./models');
 
 const app = express();
 
@@ -19,12 +20,31 @@ app.use(morgan('common'));
 app.use(express.json());
 app.use(express.static('public'));
 
+app.use(function (req, res, next) {
+    res.header('Accress-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', 'Content-Type,Authorization');
+    res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,PATCH,DELETE');
+    if (req.method === 'OPTIONS') {
+        return res.send(204);
+    }
+    next();
+});
+
 passport.use(localStrategy);
 passport.use(jwtStrategy);
 
 app.use('/api/users/', usersRouter);
 app.use('/api/auth', authRouter);
 
+const jwtAuth = passport.authenticate('jwt', { sesssion: false });
+
+app.get('/api/protected', jwtAuth, (req, res) => {
+    return res.json({
+        data: 'rosebud'
+    });
+});
+
+//-----------Ditties Requests
 //Get all
 app.get('/ditties', (req, res) => {
     Dittie

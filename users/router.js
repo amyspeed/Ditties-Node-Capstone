@@ -65,7 +65,7 @@ router.post('/', jsonParser, (req, res) => {
             'min' in sizedFields[field] &&
                 req.body[field].trim().length < sizedFields[field].min
     );
-    const overMaxField = Oject.keys(sizedFields).find(
+    const overMaxField = Object.keys(sizedFields).find(
         field =>
             'max' in sizedFields[field] &&
                 req.body[field].trim().length > sizedFields[field].max
