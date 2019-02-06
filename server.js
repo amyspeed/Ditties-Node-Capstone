@@ -8,7 +8,6 @@ const passport = require('passport');
 
 const { router: usersRouter } = require('./users');
 const { router: authRouter, localStrategy, jwtStrategy } = require('./auth');
-const { Dittie } = require('./models');
 
 mongoose.Promise = global.Promise;
 
@@ -17,11 +16,9 @@ const { DATABASE_URL, PORT } = require('./config');
 const app = express();
 
 app.use(morgan('common'));
-app.use(express.json());
-app.use(express.static('public'));
 
 app.use(function (req, res, next) {
-    res.header('Accress-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Headers', 'Content-Type,Authorization');
     res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,PATCH,DELETE');
     if (req.method === 'OPTIONS') {
@@ -36,7 +33,7 @@ passport.use(jwtStrategy);
 app.use('/api/users/', usersRouter);
 app.use('/api/auth', authRouter);
 
-const jwtAuth = passport.authenticate('jwt', { sesssion: false });
+const jwtAuth = passport.authenticate('jwt', { session: false });
 
 app.get('/api/protected', jwtAuth, (req, res) => {
     return res.json({
@@ -45,6 +42,10 @@ app.get('/api/protected', jwtAuth, (req, res) => {
 });
 
 //-----------Ditties Requests
+const { Dittie } = require('./models');
+app.use(express.json());
+app.use(express.static('public'));
+
 //Get all
 app.get('/ditties', (req, res) => {
     Dittie
