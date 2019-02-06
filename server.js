@@ -126,6 +126,13 @@ app.put('/ditties/:id', jwtAuth, (req, res) => {
 
 //Delete
 app.delete('/ditties/:id', jwtAuth, (req, res) => {
+    //This does not work:
+    // if (req.user.id === "111111111111111111111111") {
+    //     res.status(403).json({
+    //         error: `This example Diddy cannot be removed. Continue to enjoy`
+    //     });
+    // }
+
     Dittie
         .findByIdAndRemove(req.params.id)
         .then(() => {
