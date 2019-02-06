@@ -24,7 +24,9 @@
             "chords": "G7 C7 G7 G7 C7 C7 G7 G7 D7 C7 G7 D7",
             "lyrics": "Buggy Software Blues! I got Buggy Software Blues"
         }
-    ]
+    ],
+    "user": ObjectId("111111111111111111111111")
+
 }
 {
     "title": "Spicy JavaScript",
@@ -76,5 +78,6 @@
             "chords": "Em Em Em Em",
             "lyrics": ""
         }
-    ]
+    ],
+    "user": ObjectId("111111111111111111111111")
 }

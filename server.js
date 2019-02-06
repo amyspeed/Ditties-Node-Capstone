@@ -43,7 +43,11 @@ const jwtAuth = passport.authenticate('jwt', { session: false });
 //Get all
 app.get('/ditties', jwtAuth, (req, res) => {
     Dittie
-        .find()
+        .find({ $or: [
+            { user: req.user.id },
+            { user: "111111111111111111111111" } 
+            ]
+        })
         .then(ditties => {
             res.json(ditties);//.map(ditty => ditty.serialize()));
         })
@@ -78,11 +82,12 @@ app.post('/ditties', jwtAuth, (req, res) => {
 
     Dittie
         .create(req.body)
-        .then(ditty=> {
+        .then(ditty => {
             ditty.content = [];
             req.body.content.forEach((content)=>{
               ditty.content.push(content);    
             });
+            ditty.user = req.user.id;
             return ditty.save();
           })
         .then(ditty => res.status(201).json(ditty))//.serialize()))
