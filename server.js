@@ -8,6 +8,7 @@ const passport = require('passport');
 
 const { router: usersRouter } = require('./users');
 const { router: authRouter, localStrategy, jwtStrategy } = require('./auth');
+const { Dittie } = require('./models');
 
 mongoose.Promise = global.Promise;
 
@@ -16,6 +17,8 @@ const { DATABASE_URL, PORT } = require('./config');
 const app = express();
 
 app.use(morgan('common'));
+app.use(express.json());
+app.use(express.static('public'));
 
 app.use(function (req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
@@ -35,19 +38,10 @@ app.use('/api/auth', authRouter);
 
 const jwtAuth = passport.authenticate('jwt', { session: false });
 
-app.get('/api/protected', jwtAuth, (req, res) => {
-    return res.json({
-        data: 'rosebud'
-    });
-});
-
-//-----------Ditties Requests
-const { Dittie } = require('./models');
-app.use(express.json());
-app.use(express.static('public'));
+//-----------Ditties Requests----------------
 
 //Get all
-app.get('/ditties', (req, res) => {
+app.get('/ditties', jwtAuth, (req, res) => {
     Dittie
         .find()
         .then(ditties => {
@@ -60,7 +54,7 @@ app.get('/ditties', (req, res) => {
 });
 
 //Get by id
-app.get('/ditties/:id', (req, res) => {
+app.get('/ditties/:id', jwtAuth, (req, res) => {
     Dittie
         .findById(req.params.id)
         .then(ditty => res.json(ditty))
@@ -71,7 +65,7 @@ app.get('/ditties/:id', (req, res) => {
 });
 
 //Post
-app.post('/ditties', (req, res) => {
+app.post('/ditties', jwtAuth, (req, res) => {
     const requiredFields = ['title'];
     for (let i = 0; i < requiredFields.length; i++) {
         const field = requiredFields[i];
@@ -99,7 +93,7 @@ app.post('/ditties', (req, res) => {
 });
 
 //Put
-app.put('/ditties/:id', (req, res) => {
+app.put('/ditties/:id', jwtAuth, (req, res) => {
     if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
         res.status(400).json({
             error: `Request path id and request body id values must match`
@@ -126,7 +120,7 @@ app.put('/ditties/:id', (req, res) => {
 });
 
 //Delete
-app.delete('/ditties/:id', (req, res) => {
+app.delete('/ditties/:id', jwtAuth, (req, res) => {
     Dittie
         .findByIdAndRemove(req.params.id)
         .then(() => {
