@@ -16,14 +16,17 @@ const UserSchema = mongoose.Schema({
         requied: true
     },
     firstName: { type: String, default: '' },
-    lastName: { type: String, default: '' }
+    lastName: { type: String, default: '' },
+  //  ditties: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Dittie' }]
 });
 
 UserSchema.methods.serialize = function() {
     return {
+        id: this._id,
         username: this.username || '',
         firstName: this.firstName || '',
-        lastName: this.lastName || ''
+        lastName: this.lastName || '',
+     //   ditties: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Dittie' }]
     };
 };
 
