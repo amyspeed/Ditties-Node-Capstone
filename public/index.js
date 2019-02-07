@@ -59,12 +59,13 @@ function appendIndex() {
     )
 }
 
-function appendDash() {
+function appendDash(allDitties, userAuth) {
+    console.log(allDitties);
     $('main').append(
         ` <div role="container" class="dashboard">
             <div class="row">
                 <div class="col-12">
-                    <h2>Hi {data.users[index].name.firstName}! Let's get to tracking your Diddies.</h2>
+                    <h2>Hi (user's first name)! Let's get to tracking your Diddies.</h2>
                     <form id="new-song">
                         <input type="submit" value="Create New Song">
                     </form>
@@ -84,7 +85,17 @@ function appendDash() {
 
             </section>
         </div>`
-    )
+    );
+    displaySongs(allDitties, userAuth);
+}
+
+function displaySongs(allDitties, userAuth) {
+    for (let i = 0; i < allDitties.length; i++) {
+        $('.song-icons').append(
+            `<button class="title" value="${allDitties[i]._id}">${allDitties[i].title}<button>`
+        );
+    }
+    handleSongButtons(allDitties, userAuth);
 }
 
 function appendSongForm() {
@@ -177,28 +188,28 @@ function appendContent() {
     )
 }
 
-function appendSong() {
+function appendSong(thisSong) {
     $('main').append(
         `<div role="container" class= "song-page">
             <div class="row">
                 <div class="col-12">
                     <input type="submit" value="My Songs" class="dash">
-                    <h2>{thisSong.title}</h2>
-                    <p>Title: {thisSong.title}<br>
-                    Coauthor(s): {thisSong.coauthors}<br>
-                    Genre/Feel: {thisSong.genreFeel}<br>
-                    Speed: {thisSong.speed}<br>
-                    Key: {thisSong.key} Capo: {thisSong.capo}<br>
-                    Time Signature: {thisSong.timeSig.top}/{thisSong.timeSig.bottom}<br>
-                    Strum Notes: {thisSong.strum}<br>
-                    Other Misc. Notes: {thisSong.notes}<br></p>
+                    <h2>${thisSong.title}</h2>
+                    <p>Title: ${thisSong.title}<br>
+                    Coauthor(s): ${thisSong.coauthors}<br>
+                    Genre/Feel: ${thisSong.genreFeel}<br>
+                    Speed: ${thisSong.speed}<br>
+                    Key: ${thisSong.key} Capo: ${thisSong.capo}<br>
+                    Time Signature: ${thisSong.timeSig.top}/${thisSong.timeSig.bottom}<br>
+                    Strum Notes: ${thisSong.strum}<br>
+                    Other Misc. Notes: ${thisSong.notes}<br></p>
                     <input type="submit" value="Edit Song" id="edit">
                     <input type="submit" value="Delete Song" id="delete">
                     <input type="submit" value="My Songs" class="dash">
                 </div>
             </div>
         </div>`
-    )
+    );
 }
 
 
@@ -212,8 +223,6 @@ function handleLogIn() {
         user.password = $('#password').val();
         console.log(JSON.stringify(user));
         login(user);
-//        $('.index').remove();
-//        appendDash();
     })
 }
 
@@ -230,8 +239,12 @@ function handleSignUp() {
 function handleDemo() {
     $('.users').on('click', '#demo', function(event) {
         event.preventDefault();
-        $('.index').remove();
-        appendDash();
+        let user = {}
+        user.username = 'demo';
+        user.password = 'Password123';
+        console.log(JSON.stringify(user));
+        login(user);
+
     })
 }
 
@@ -244,7 +257,7 @@ function handleHaveAccount() {
     })
 }
 
-function handleNewSong() {
+function handleNewSong(userAuth) {
     $('main').on('click', '#new-song', function(event) {
         event.preventDefault();
         $('.dashboard').remove();
@@ -259,27 +272,21 @@ function handleSection() {
     });
 }
 
-function handleDelete() {
+function handleDelete(userAuth, thisSong) {
     $('main').on('click', '#delete', function(event) {
         event.preventDefault();
-        getConfirmation();
+        getConfirmation(userAuth, thisSong);
     })
 }
 
-function getConfirmation() {
-    let deleteConfirm = confirm('Are you sure you want to perminently delete this Diddy?');
+function getConfirmation(userAuth, thisSong) {
+    let deleteConfirm = confirm('Are you sure you want to perminently delete this Ditty?');
     if( deleteConfirm == true ) {
-        permDelete();
+        deleteDitty(userAuth, thisSong);
     }
     else {
         return false;
     }
-}
-
-function permDelete() {
-    $('main').empty();
-    appendDash();
-    //Delete data!!
 }
 
 function handleClear() {
@@ -299,11 +306,25 @@ function handleSave() {
     })
 }
 
-function handleMySongs() {
+function handleEdit(allDitties, userAuth, thisSong) {
+
+}
+
+function handleMySongs(allDitties, userAuth) {
     $('main').on('click', '.dash', function(event) {
         event.preventDefault();
         $('.song-page').remove();
-        appendDash();
+        appendDash(allDitties, userAuth);
+    })
+}
+
+function handleSongButtons(allDitties, userAuth) {
+    $('main').on('click', '.title', function(event) {
+        event.preventDefault();
+        let songId = $(this).val();
+        $('.dashboard').remove();
+        console.log(songId);
+        getDittyById(allDitties, songId, userAuth);
     })
 }
 
@@ -333,23 +354,89 @@ function bearerToken(responseJsonAuth) {
     console.log(responseJsonAuth);
     const userAuth = responseJsonAuth.authToken;
     getDitties(userAuth);
+    console.log(userAuth);
     $('.index').remove();
-    appendDash();
 }
 
 //-------Ditties Requests----------
 
-function getDitties() {
-    
+function getDitties(userAuth) {
+    fetch('http://localhost:8080/ditties', {
+        method: "GET",
+        headers: {
+            'Authorization': `Bearer ${userAuth}`
+        }
+    })
+    .then(response => {
+        if (response.ok) {
+            return response.json();
+        }
+        throw new Error(response.statusText);
+    })
+    .then(allDitties => 
+        callDashFunctions(allDitties, userAuth))
+    .catch(err => {
+        console.log(err)
+    });
+}
+
+function callDashFunctions(allDitties, userAuth) {
+    appendDash(allDitties, userAuth);
+    handleNewSong(userAuth);
+}
+
+function getDittyById(allDitties, songId, userAuth) {
+    fetch(`http://localhost:8080/ditties/${songId}`, {
+        method: "GET",
+        headers: {
+            'Authorization': `Bearer ${userAuth}`
+        }
+    })
+    .then(response => {
+        if (response.ok) {
+            return response.json();
+        }
+        throw new Error(response.statusText);
+    })
+    .then(thisSong =>
+        callSongFunctions(allDitties, userAuth, thisSong))
+    .catch(err => {
+        console.log(err)
+    });
+}
+
+function callSongFunctions(allDitties, userAuth, thisSong){
+    appendSong(thisSong)
+    handleDelete(userAuth, thisSong);
+    handleEdit(allDitties, userAuth, thisSong);
+    handleMySongs(allDitties, userAuth);
+}
+
+function deleteDitty(userAuth, thisSong) {
+    $('main').empty();
+    let songId = thisSong._id;
+    console.log(songId);
+    fetch(`http://localhost:8080/ditties/${songId}`, {
+        method: "DELETE",
+        headers: {
+            'Authorization': `Bearer ${userAuth}`
+        }
+    })
+    .then(response => {
+        if (response.ok) {
+            getDitties(userAuth);
+        }
+        throw new Error(response.statusText);
+    })
+    .catch(err => {
+        console.log(err)
+    })
 }
 
 handleDemo();
 handleLogIn();
 handleSignUp();
 handleHaveAccount();
-handleNewSong();
 handleSection();
-handleDelete();
 handleClear();
 handleSave();
-handleMySongs();
