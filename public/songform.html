@@ -1,12 +1,91 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <title></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Ditties | Song Form</title>
+    <!--CSS Links here-->
+    <!--Font Links here-->
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
 </head>
 
 <body>
-    <p>Hello World</p>
+    <nav role="navigation">
+        <header>
+            <h1><a href="dash.html">Ditties</a></h1>
+        </header>
+    </nav>
+    <main role="main">
+        <div role="container">
+            <div class="row">
+                <div class="col-12 form-page">
+                    <h2>Let your song ideas come to life!</h2>
+                    <form class="song-form">
+                        <fieldset>
+                            <legend>Fill in all inspired fields</legend>
+                            <label for="title">Title</label>
+                            <input type="text" id="title"><br>
+                            
+                            <label for="coauthors">Coauthor(s)</label>
+                            <input type="text" id="coauthors"><br>
+                            
+                            <label for="genreFeel">Genre/Feel</label>
+                            <input type="text" id="genreFeel"><br>
+                            
+                            <label for="Speed">Speed</label>
+                            <select id="Speed">
+                                <option value="">none selected</option>
+                                <option value="fast">fast</option>
+                                <option value="moderate">moderate</option>
+                                <option value="slow">slow</option>
+                            </select><br>    
+                            
+                            <label for="key">Key</label>
+                            <input type="text" id="Key">
+                            
+                            <label for="capo">capo</label>
+                            <input type="number" id="capo" min=0 max=20><br>
+                            
+                            <label for="timeSig-top">Time Signature (top)</label>
+                            <input type=number id="timeSig-top"><br>
+                            <label for="timeSig-bottom">Time Signature (bottom)</label>
+                            <input type=number id="timeSig-bottom"><br>
+
+                            <label for="strum">Strum/Picking Notes</label>
+                            <input type="text" id="strum" placeholder="e.g. DUXUDU"><br>
+
+                            <label for="notes">Other Misc. Notes</label>
+                            <input type="text" id="notes"><br>
+                            
+                            <div class="content">
+                                <label for="section1">Section</label>
+                                <input type="number" min="1" max="10" id="sectionId">
+                                <select id="section1">
+                                    <option value="">none selected</option>
+                                    <option value="intro">Intro</option>
+                                    <option value="verse">Verse</option>
+                                    <option value="chorus">Chorus</option>
+                                    <option value="bridge">Bridge</option>
+                                    <option value="instrumental">Instrumental</option>
+                                </select><br>
+                            </div>   
+                                <input type="submit" value="create section" class="new-section">
+                            
+                            
+                            <br>
+                            <input type="submit" value="Save" id="save">
+                            <input type="submit" value="Clear Form" id="clear">
+                            <input type="submit" value="Delete Song" id="delete">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <script type="text/javascript" src="js/song-mock-data.js"></script>
+    <script type="text/javascript" src="js/songform.js"></script>
+
 </body>
 
 

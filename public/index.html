@@ -1,12 +1,50 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <title></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Ditties | Songwriters' Notes</title>
+    <!--CSS Links here-->
+    <!--Font Links here-->
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
 </head>
 
 <body>
-    <p>Hello World</p>
+    <nav role="navigation">
+        <header>
+            <h1>Ditties</h1>
+        </header>
+    </nav>
+    <main role="main">
+        <div role="container">
+            <div class="row">
+                <div class="col-12">
+                    <h2>Welcome to Ditties, the songwriters' app for tracking song ideas.</h2>
+                    <form class="users">
+                        <fieldset>
+                            <legend>Sign in or Sign up!</legend>
+                            <label for="username">Username</label>
+                            <input type="text" id="username"><br>
+                            <label for="password">Password</label>
+                            <input type="password" id="password"><br>
+                            <input type="submit" value="Sign in!" id="signin"><br>
+                            <label for="signup">Don't have an account yet?</label><br>
+                            <input type="submit" id="signup" value="Sign Up">
+                        </fieldset>
+                        <fieldset>
+                            <legend>Can't commit just yet?</legend>
+                            <input type="submit" value="demo" id="demo">
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script type="text/javascript" src="js/signin.js"></script>
+    <script type="text/javascript" src="js/users-mock-data.js"></script>
+
 </body>
 
 

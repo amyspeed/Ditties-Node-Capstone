@@ -23,25 +23,3 @@ let MOCK_USERS = {
         }
     ]
 };
-
-//This function to be replaced with AJAX calls to server
-
-function getUsers(callbackFn) {
-    setTimeout(function(){ callbackFn(MOCK_USERS)}, 1);
-}
-
-function displayUsers(data) {
-    for (index in data.users) {
-        $('body').append(
-            `<p>${data.users[index].name.firstName}</p>`
-        );
-    }
-}
-
-function getAndDisplayUsers() {
-    getUsers(displayUsers);
-}
-
-$(function() {
-    getAndDisplayUsers();
-})
