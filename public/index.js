@@ -1,6 +1,6 @@
 'use strict';
 
-//All appended pages:
+//---------All appended pages------------
 
 function appendSignUp() {
     $('main').append(
@@ -64,7 +64,7 @@ function appendDash() {
         ` <div role="container" class="dashboard">
             <div class="row">
                 <div class="col-12">
-                    <h2></h2>
+                    <h2>Hi {data.users[index].name.firstName}! Let's get to tracking your Diddies.</h2>
                     <form id="new-song">
                         <input type="submit" value="Create New Song">
                     </form>
@@ -201,15 +201,19 @@ function appendSong() {
     )
 }
 
+
+//---------Handle Buttons------------
+
 function handleLogIn() {
     $('main').on('click', '#signin', function(event) {
         event.preventDefault();
-        // let user = {}
-        // user.username = $('#username').val();
-        // user.password = $('#password').val();
-
-        $('.index').remove();
-        appendDash();
+        let user = {}
+        user.username = $('#username').val();
+        user.password = $('#password').val();
+        console.log(JSON.stringify(user));
+        login(user);
+//        $('.index').remove();
+//        appendDash();
     })
 }
 
@@ -303,6 +307,41 @@ function handleMySongs() {
     })
 }
 
+//----------User requests----------
+
+function login(user) {
+//change fetch URL for deployment:
+    fetch('http://localhost:8080/api/auth/login', {
+        method: "POST",
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(user) 
+    })
+    .then(response => {
+        if (response.ok) {
+            return response.json();
+        }
+        throw new Error(response.statusText);
+    })
+    .then(responseJsonAuth => bearerToken(responseJsonAuth))
+    .catch(err => {
+        console.log(err)
+        alert(`${err.message}: Incorrect Username or Password`)
+    });
+}
+
+function bearerToken(responseJsonAuth) {
+    console.log(responseJsonAuth);
+    const userAuth = responseJsonAuth.authToken;
+    getDitties(userAuth);
+    $('.index').remove();
+    appendDash();
+}
+
+//-------Ditties Requests----------
+
+function getDitties() {
+    
+}
 
 handleDemo();
 handleLogIn();
