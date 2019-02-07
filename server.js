@@ -129,24 +129,37 @@ app.put('/ditties/:id', jwtAuth, (req, res) => {
 
 //Delete
 app.delete('/ditties/:id', jwtAuth, (req, res) => {
-    //This does not work:
-    // if (req.user.id === "111111111111111111111111") {
-    //     res.status(403).json({
-    //         error: `This example Diddy cannot be removed. Continue to enjoy`
-    //     });
-    // }
-
     Dittie
-        .findByIdAndRemove(req.params.id)
-        .then(() => {
-            console.log(`Deleted song with id ${req.params.id}`);
-            res.status(204).end();
+        .findOne({_id: req.params.id})
+        .then(ditty => {
+            console.log(ditty.user, req.user.id)
+            if (req.user.id == ditty.user) {
+            ditty
+                .remove(req.user.id)
+                .then(() => {
+                    console.log(`Deleted song with id ${req.params.id} from user ${req.user.id}`);
+                    res.status(204).end();
+                })
+//This needs WORK:                
+                .catch(err => {
+                    console.error(err);
+                    res.status(403).json({
+                        error: `This example Diddy cannot be removed. Continue to enjoy`
+                    })
+                })
+            
+            }
         })
+        // .findByIdAndRemove(req.params.id)
+        // .then(() => {
+        //     console.log(`Deleted song with id ${req.params.id}`);
+        //     res.status(204).end();
+        // })
         .catch(err => {
-            console.error(err);
-            res.status(500).json({ messaage: 'Internal server error' });
-        });
-});
+             console.error(err);
+             res.status(500).json({ message: 'Internal server error' });
+         });
+    });
 
 
 app.use('*', function (req, res) {
