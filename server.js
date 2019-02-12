@@ -132,29 +132,23 @@ app.delete('/ditties/:id', jwtAuth, (req, res) => {
     Dittie
         .findOne({_id: req.params.id})
         .then(ditty => {
-            console.log(ditty.user, req.user.id)
+            console.log(ditty)
+            if (ditty === null) {
+                return res.status(404).end();
+            }
             if (req.user.id == ditty.user) {
-            ditty
+            return ditty
                 .remove(req.user.id)
                 .then(() => {
                     console.log(`Deleted song with id ${req.params.id} from user ${req.user.id}`);
                     res.status(204).end();
-                })
-//This needs WORK:                
-                .catch(err => {
-                    console.error(err);
-                    res.status(403).json({
-                        error: `This example Diddy cannot be removed. Continue to enjoy`
-                    })
-                })
-            
+                })                
             }
+            return res.status(401).json({
+                error: `This example Diddy cannot be removed. Continue to enjoy`
+            })
         })
-        // .findByIdAndRemove(req.params.id)
-        // .then(() => {
-        //     console.log(`Deleted song with id ${req.params.id}`);
-        //     res.status(204).end();
-        // })
+        
         .catch(err => {
              console.error(err);
              res.status(500).json({ message: 'Internal server error' });
