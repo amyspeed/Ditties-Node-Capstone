@@ -311,6 +311,7 @@ function handleEdit(allDitties, userAuth, thisSong) {
 }
 
 function handleMySongs(allDitties, userAuth) {
+    //research remove EL
     $('main').on('click', '.dash', function(event) {
         event.preventDefault();
         $('.song-page').remove();
@@ -319,6 +320,7 @@ function handleMySongs(allDitties, userAuth) {
 }
 
 function handleSongButtons(allDitties, userAuth) {
+    //remove EL
     $('main').on('click', '.title', function(event) {
         event.preventDefault();
         let songId = $(this).val();
@@ -413,7 +415,6 @@ function callSongFunctions(allDitties, userAuth, thisSong){
 }
 
 function deleteDitty(userAuth, thisSong) {
-    $('main').empty();
     let songId = thisSong._id;
     console.log(songId);
     fetch(`http://localhost:8080/ditties/${songId}`, {
@@ -424,13 +425,20 @@ function deleteDitty(userAuth, thisSong) {
     })
     .then(response => {
         if (response.ok) {
-            getDitties(userAuth);
+            return getNewDitties(userAuth);
         }
         throw new Error(response.statusText);
     })
     .catch(err => {
-        console.log(err)
+        console.log(err);
+        alert(`${err.message}: This example Diddy cannot be removed. Continue to enjoy!`);
+        return getNewDitties(userAuth);
     })
+}
+
+function getNewDitties(userAuth) {
+    $('main').empty();
+    return getDitties(userAuth);
 }
 
 handleDemo();
