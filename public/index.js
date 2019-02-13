@@ -95,7 +95,7 @@ function displaySongs(allDitties, userAuth) {
             `<button class="title" value="${allDitties[i]._id}">${allDitties[i].title}<button>`
         );
     }
-    handleSongButtons(allDitties, userAuth);
+    handleSongButtonsOff(allDitties, userAuth);
 }
 
 function appendSongForm() {
@@ -272,7 +272,14 @@ function handleSection() {
     });
 }
 
-function handleDelete(userAuth, thisSong) {
+function handleDeleteOff(userAuth, thisSong) {
+    $('#delete').click(function(event) {
+        event.preventDefault();
+        handleDeleteOn(userAuth, thisSong);
+    })
+}
+
+function handleDeleteOn(userAuth, thisSong) {
     $('main').on('click', '#delete', function(event) {
         event.preventDefault();
         getConfirmation(userAuth, thisSong);
@@ -310,8 +317,15 @@ function handleEdit(allDitties, userAuth, thisSong) {
 
 }
 
-function handleMySongs(allDitties, userAuth) {
-    //research remove EL
+function handleMySongsOff(allDitties, userAuth) {
+    $('.dash').click(function(event) {
+        event.preventDefault();
+        $('main').off('click');
+        handleMySongsOn(allDitties, userAuth);
+    })
+}
+
+function handleMySongsOn(allDitties, userAuth) {
     $('main').on('click', '.dash', function(event) {
         event.preventDefault();
         $('.song-page').remove();
@@ -319,15 +333,22 @@ function handleMySongs(allDitties, userAuth) {
     })
 }
 
-function handleSongButtons(allDitties, userAuth) {
-    //remove EL
+function handleSongButtonsOff(allDitties, userAuth) {
+    $('.title').click(function(event) {
+        event.preventDefault();
+        $('main').off('click');
+        handleSongButtonsOn(allDitties, userAuth);
+    });
+}
+
+function handleSongButtonsOn(allDitties, userAuth){
     $('main').on('click', '.title', function(event) {
         event.preventDefault();
         let songId = $(this).val();
         $('.dashboard').remove();
         console.log(songId);
         getDittyById(allDitties, songId, userAuth);
-    })
+    });
 }
 
 //----------User requests----------
@@ -362,6 +383,7 @@ function bearerToken(responseJsonAuth) {
 
 //-------Ditties Requests----------
 
+//--GET
 function getDitties(userAuth) {
     fetch('http://localhost:8080/ditties', {
         method: "GET",
@@ -387,6 +409,7 @@ function callDashFunctions(allDitties, userAuth) {
     handleNewSong(userAuth);
 }
 
+//--GET by ID
 function getDittyById(allDitties, songId, userAuth) {
     fetch(`http://localhost:8080/ditties/${songId}`, {
         method: "GET",
@@ -409,11 +432,12 @@ function getDittyById(allDitties, songId, userAuth) {
 
 function callSongFunctions(allDitties, userAuth, thisSong){
     appendSong(thisSong)
-    handleDelete(userAuth, thisSong);
+    handleDeleteOff(userAuth, thisSong);
     handleEdit(allDitties, userAuth, thisSong);
-    handleMySongs(allDitties, userAuth);
+    handleMySongsOff(allDitties, userAuth);
 }
 
+//--DELETE
 function deleteDitty(userAuth, thisSong) {
     let songId = thisSong._id;
     console.log(songId);
