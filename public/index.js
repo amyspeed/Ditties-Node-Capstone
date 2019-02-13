@@ -116,8 +116,8 @@ function appendSongForm() {
                             <label for="genreFeel">Genre/Feel</label>
                             <input type="text" id="genreFeel"><br>
                         
-                            <label for="Speed">Speed</label>
-                            <select id="Speed">
+                            <label for="speed">Speed</label>
+                            <select id="speed">
                                 <option value="">none selected</option>
                                 <option value="fast">fast</option>
                                 <option value="moderate">moderate</option>
@@ -125,7 +125,7 @@ function appendSongForm() {
                             </select><br>    
                         
                             <label for="key">Key</label>
-                            <input type="text" id="Key">
+                            <input type="text" id="key">
                         
                             <label for="capo">capo</label>
                             <input type="number" id="capo" min=0 max=20><br>
@@ -172,10 +172,10 @@ function appendContent() {
         `<label for=chords>Chords</label>
         <input type="text" id="chords"><br>
 
-        <label for=lyrics1>Lyrics</label>
+        <label for=lyrics>Lyrics</label>
         <input type="text" id="lyrics"><br>
     
-        <label for="section1">Section</label>
+        <label for="section">Section</label>
         <input type="number" min="1" max="10" id="sectionId">
         <select id="section">
             <option value="">none selected</option>
@@ -257,11 +257,13 @@ function handleHaveAccount() {
     })
 }
 
-function handleNewSong(userAuth) {
+function handleNewSong(allDitties, userAuth) {
     $('main').on('click', '#new-song', function(event) {
         event.preventDefault();
         $('.dashboard').remove();
         appendSongForm();
+        handleSection();
+        handleSave(allDitties, userAuth);
     })
 }
 
@@ -270,6 +272,47 @@ function handleSection() {
         event.preventDefault();
         appendContent();
     });
+}
+
+
+function handleSave(allDitties, userAuth) {
+    $('main').on('click', '#save', function(event) {
+        event.preventDefault();
+        renderContent(allDitties, userAuth);
+    })
+}
+
+function renderContent(allDitties, userAuth) {
+    let contentArray = [];
+    let contentObject = {};
+    for (let i=0; i < 5; i++) {
+            contentObject.sectionId = $('#sectionId').val(),
+            contentObject.section = $('#section').val(),
+            contentObject.chords = $('#chords').val(),
+            contentObject.lyrics = $('#lyrics').val()
+        contentArray.push(contentObject[i]);
+    }
+    console.log(contentObject, contentArray);
+    createSongObject(allDitties, userAuth, contentArray);
+}
+
+function createSongObject(allDitties, userAuth, contentArray) {
+    let song = {};
+        song.title = $('#title').val();
+        song.coauthors = $('#coauthors').val();
+        song.genreFeel = $('#genreFeel').val();
+        song.speed = $('#speed').val();
+        song.key = $('#key').val();
+        song.capo = $('#capo').val();
+        song.strum = $('#strum').val();
+        song.notes = $('#notes').val();
+        song.timeSig = {};
+        song.timeSig.top = $('#timeSig-top').val();
+        song.timeSig.bottom = $('#timeSig-bottom').val();
+        song.content = contentArray;
+        console.log(song, JSON.stringify(song));
+        $('.songform').remove();
+        postDitty(allDitties, userAuth, song);
 }
 
 function handleDeleteOff(userAuth, thisSong) {
@@ -303,14 +346,6 @@ function handleClear() {
         appendSongForm();
     })
     //code here
-}
-
-function handleSave() {
-    $('main').on('click', '#save', function(event) {
-        event.preventDefault();
-        $('.songform').remove();
-        appendSong();
-    })
 }
 
 function handleEdit(allDitties, userAuth, thisSong) {
@@ -386,7 +421,7 @@ function bearerToken(responseJsonAuth) {
 //--GET
 function getDitties(userAuth) {
     fetch('http://localhost:8080/ditties', {
-        method: "GET",
+        method: 'GET',
         headers: {
             'Authorization': `Bearer ${userAuth}`
         }
@@ -406,13 +441,13 @@ function getDitties(userAuth) {
 
 function callDashFunctions(allDitties, userAuth) {
     appendDash(allDitties, userAuth);
-    handleNewSong(userAuth);
+    handleNewSong(allDitties, userAuth);
 }
 
 //--GET by ID
 function getDittyById(allDitties, songId, userAuth) {
     fetch(`http://localhost:8080/ditties/${songId}`, {
-        method: "GET",
+        method: 'GET',
         headers: {
             'Authorization': `Bearer ${userAuth}`
         }
@@ -465,10 +500,40 @@ function getNewDitties(userAuth) {
     return getDitties(userAuth);
 }
 
+//--POST
+function postDitty(allDitties, userAuth, song) {
+    console.log(userAuth);
+    fetch('http://localhost:8080/ditties', {
+        method: 'POST',
+        headers: {
+            'Authorization': `Bearer ${userAuth}`,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(song)
+    })
+    .then(response => {
+        if (response.ok) {
+
+            return response.json();
+        }
+        throw new Error(response.statusText);
+    })
+    .then(thisSong =>
+        getNewSongId(allDitties, userAuth, thisSong))
+    // .then(thisSong =>
+    //     callSongFunctions(allDitties, userAuth, thisSong))
+    .catch(err => {
+        console.log(err)
+    });
+}
+
+function getNewSongId(allDitties, userAuth, thisSong) {
+    let songId = thisSong._id;
+    getDittyById(allDitties, songId, userAuth);
+}
+
 handleDemo();
 handleLogIn();
 handleSignUp();
 handleHaveAccount();
-handleSection();
 handleClear();
-handleSave();
