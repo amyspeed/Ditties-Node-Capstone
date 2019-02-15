@@ -274,7 +274,6 @@ function appendEditForm(thisSong) {
                         
                             <br>
                             <input type="submit" value="Save" id="save-edit">
-                            <input type="submit" value="Clear Form" id="clear">
                             <input type="submit" value="Delete Song" id="delete">
                     </form>
                 </div>
@@ -283,7 +282,7 @@ function appendEditForm(thisSong) {
     )
 }
 
-function appendEditContent(userAuth, thisSong) {
+function appendEditContent(thisSong) {
     for(let i=0; i<thisSong.content.length; i++){
         $('.content').append(
             `<br><label for="section">Section</label>
@@ -306,8 +305,6 @@ function appendEditContent(userAuth, thisSong) {
             <input value="${thisSong.content[i].lyrics}" type="text" id="lyrics${i}"><br>`
         )
     }
-    let countEdit = thisSong.content.length;
-    handleSectionEdit(userAuth, thisSong, countEdit);
 }
 
 function appendMoreContent(countEdit) {
@@ -363,7 +360,6 @@ function handleSignUp() {
         event.preventDefault();
         $('.index').remove();
         appendSignUp();
-        console.log('success');
     })
 }
 
@@ -384,7 +380,6 @@ function handleHaveAccount() {
         event.preventDefault();
         $('.register').remove();
         appendIndex();
-        console.log('success');
     })
 }
 
@@ -516,22 +511,48 @@ function handleSongButtonsOn(userAuth){
     });
 }
 
+function handleEditOff(userAuth, thisSong){
+    $('#edit').click(function(event) {
+        event.preventDefault();
+        $('main').off('click');
+        handleEdit(userAuth, thisSong);
+    });
+}
+
 function handleEdit(userAuth, thisSong) {
     $('main').on('click', '#edit', function(event) {
         event.preventDefault();
         $('.song-page').remove();
         appendEditForm(thisSong);
-        appendEditContent(userAuth, thisSong);
-        handleClear();
+        appendEditContent(thisSong);
+        // handleClearEdit(thisSong);
+        let countEdit = thisSong.content.length;
+        handleSectionEdit(userAuth, thisSong, countEdit);
+        handleSaveEdit(userAuth, thisSong, countEdit);
     })
 }
+
+// function handleClearEdit(thisSong) {
+//     $('main').on('click', '#clear-edit', function(event) {
+//         event.preventDefault();
+//         $('.songform').remove();
+//         appendEditForm(thisSong);
+//     })
+// }
 
 function handleSectionEdit(userAuth, thisSong, countEdit) {
     $('main').on('click', '#section-edit', function(event) {
         event.preventDefault();
         appendMoreContent(countEdit);
         countEdit = countEdit+1;
-        console.log(countEdit);
+        handleSaveEditOff(userAuth, thisSong, countEdit);
+    });
+}
+
+function handleSaveEditOff(userAuth, thisSong, countEdit){
+    $('#save-edit').click(function(event) {
+        event.preventDefault();
+        $('main').off('click');
         handleSaveEdit(userAuth, thisSong, countEdit);
     });
 }
@@ -546,6 +567,7 @@ function handleSaveEdit(userAuth, thisSong, countEdit) {
 
 function renderEditContent(userAuth, songId, countEdit) {
     let contentArray = [];
+    console.log('countEdit '+countEdit);
     for (let i=0; i < countEdit; i++) {
         let contentObject = {};
             contentObject.sectionId = $(`#sectionId${i}`).val(),
@@ -686,7 +708,7 @@ function callSongFunctions(userAuth, thisSong){
     appendSong(thisSong);
     appendSongContent(thisSong);
     handleDeleteOff(userAuth, thisSong);
-    handleEdit(userAuth, thisSong);
+    handleEditOff(userAuth, thisSong);
     handleMySongsOff(userAuth);
 }
 
