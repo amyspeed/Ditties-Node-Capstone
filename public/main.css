@@ -1,10 +1,33 @@
+body {
+    background-color: gainsboro;
+}
 
+nav {
+    margin-top: 0;
+    margin-left: 0;
+    width: 100%;
+    position: absolute;
+    background-color: white;
+}
+
+#logo {
+    height: 125px;
+}
+
+.index, .register {
+    background-image: url('images/songwriting.jpg');
+    background-repeat: no-repeat;
+}
+
+footer {
+    background-color: white;
+}
 
 .spinner {
-    width: 100px;
-    height: 100px;
+    width: 75px;
+    height: 75px;
     background-image: url('images/DittiesSpinner.png');
-    background-size: 100px 100px;
+    background-size: 75px 75px;
     animation-name: spin;
     animation-duration: 15s;
     animation-iteration-count: infinite;
