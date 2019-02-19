@@ -1,29 +1,136 @@
-body {
-    background-color: gainsboro;
+html {
+    background-color: rgb(89, 89, 89);
+    /*font-family: ;*/
 }
 
 nav {
-    margin-top: 0;
-    margin-left: 0;
+    position: fixed;
+    left: 0;
+    top: 0;
     width: 100%;
-    position: absolute;
+    height: 115px;
     background-color: white;
+    padding-top: 5px;
+    text-align: center;
 }
 
 #logo {
-    height: 125px;
+    height: 100px;
+}
+
+main {
+    margin-top: 115px;
 }
 
 .index, .register {
     background-image: url('images/songwriting.jpg');
     background-repeat: no-repeat;
+    background-size: cover;
+    /* background-position: right 80px; */
+    padding-bottom: 30px;
+}
+
+/* .index-header {
+    background-color: rgba(0, 0, 0, 0.523);
+    padding-top: 15px;
+    padding-left: 15px;
+    padding-bottom: 2px;
+    margin-left: 0;
+
+} */
+
+h2 {
+    color: rgb(0, 0, 0);
+    margin-bottom: 0;
+    padding-top: 20px;
+    font-size: 20px;
+}
+
+h3 {
+    color: rgb(0, 0, 0);
+    margin-top: 0;
+    margin-left: 40px;
+    font-size: 15px;
+}
+
+h4 {
+    font-size: 20px;
+}
+
+/* .readable {
+    background-color: rgba(255, 255, 255, 0.523);
+} */
+
+form {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 30px;
+    max-width: 400px;
+    background-image: linear-gradient(rgba(255, 255, 255, 0.947), rgba(177, 177, 177, 0.824));
+    border: 1px solid rgb(155, 155, 155);
+    border-radius: 10px;
+}
+
+#username {
+    margin-bottom: 10px;
+}
+
+#username, #password {
+    width: 200px;
+}
+
+#signin {
+    margin-top: 20px;
+}
+
+#signin, #signup {
+    width: 200px;
+    background-color: rgba(0, 0, 0, 0.824);
+    color: white;
+    border-radius: 5px 5px;
+    font-size: 15px;
+}
+
+#signin:hover, #signup:hover, #signin:focus, #signup:focus {
+    background-color: rgb(9, 220, 220);
+    color: black;
+}
+
+#demo {
+    background: none;
+    border: none;
+    width: 75px;
+    height: 75px;
+    position: relative;
+    display: inline-block;
+}
+
+.button-pick, .button-pick-hover {
+    width: 75px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 99;
+}
+
+.button-pick-hover {
+    display: none;
+}
+
+#demo:hover .button-pick-hover {
+    display: inline;
 }
 
 footer {
-    background-color: white;
+    background-color: rgb(255, 255, 255);
+    padding-top: 15px;
+    padding-bottom: 20px;
 }
 
 .spinner {
+    margin-left: auto;
+    margin-right: auto;
     width: 75px;
     height: 75px;
     background-image: url('images/DittiesSpinner.png');

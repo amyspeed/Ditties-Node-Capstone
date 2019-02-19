@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <title>Ditties | Songwriters' Notes</title>
-    
+    <link href="float-grid.css" rel="stylesheet" type="text/css" />
     <link href="main.css" rel="stylesheet" type="text/css" />
     <!--Font Links here-->
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
@@ -20,22 +20,31 @@
     <main role="main">
         <div role="container" class= "index">
             <div class="row">
-                <div class="col-12">
-                    <h2>Welcome to Ditties, the songwriters' app for tracking song ideas.</h2>
+                <div class="col-12 readable">
+                    <header class="index-header">
+                        <h2>Welcome to Ditties</h2>
+                        <h3>The songwriters' app for tracking song ideas</h3>
+                    </header>
                     <form class="users">
-                        <fieldset>
-                            <legend>Sign in or Sign up!</legend>
-                            <label for="username">Username</label>
+                        <header>
+                            <h4>Sign in or Sign up!</h4>
+                        </header>
+                            <label for="username">Username</label><br>
                             <input type="text" id="username"><br>
-                            <label for="password">Password</label>
+                            <label for="password">Password</label><br>
                             <input type="password" id="password"><br>
-                            <input type="submit" value="Sign in!" id="signin"><br>
-                            <label for="signup">Don't have an account yet?</label><br>
+                            <input type="submit" value="Sign in" id="signin"><br>
+                        <header>
+                            <h4>Don't have an account yet?</h4>
+                        </header>
                             <input type="submit" id="signup" value="Sign Up">
-                        </fieldset>
-                        <fieldset>
-                            <legend>Can't commit just yet?</legend>
-                            <input type="submit" value="demo" id="demo">
+                        <header>
+                            <h4>Can't commit just yet?</h4>
+                        </header>
+                            <button type="submit" value="demo" id="demo">
+                                <img class="button-pick" src="images/DemoPick.png">
+                                <img class="button-pick-hover" src="images/DemoPickHover.png">
+                            </button>
                         </fieldset>
                     </form>
                 </div>
