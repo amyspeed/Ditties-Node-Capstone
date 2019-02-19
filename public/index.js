@@ -9,23 +9,21 @@ function appendSignUp() {
         `<div role="container" class="register">
             <div class="row">
                 <div class="col-12">
-                    <h2>Create a new account and start writing songs today!</h2>
+                    <h1>Create an account</h1>
+                    <h2>and start writing amazing songs today!</h2>
                     <form class="signup">
-                        <fieldset>
-                            <label for="firstName">First Name</label>
-                            <input type="text" id="firstName"><br>
-                            <label for="lastName">Last Name</label>
-                            <input type="text" id="lastName"><br>
-                            <label for="username">Username</label>
-                            <input type="text" id="username"><br>
-                            <label for="password">Password</label>
-                            <input type="password" id="password"><br>
-                            <input type="submit" value="Register" id="register"><br>
-                        </fieldset>
-                        <fieldset>
-                            <legend>Already have an account?</legend>
-                            <input type="submit" value="Sign In" id="sign-in-page">
-                        </fieldset>
+                            <label for="firstName">First Name</label><br>
+                            <input type="text" id="firstName" class="signin-fields"><br>
+                            <label for="lastName">Last Name</label><br>
+                            <input type="text" id="lastName" class="signin-fields"><br>
+                            <label for="username">Username</label><br>
+                            <input type="text" id="username" class="signin-fields"><br>
+                            <label for="password">Password</label><br>
+                            <input type="password" id="password" class="signin-fields"><br>
+                            <input type="submit" value="Register" id="register" class="form-buttons"><br>
+
+                        <header><h3>Already have an account?</h3></header>
+                            <input type="submit" value="Sign In" id="sign-in-page" class="form-buttons">
                     </form>
                 </div>
             </div>
@@ -36,28 +34,37 @@ function appendSignUp() {
 function appendIndex() {
     $('main').append(
         `<div role="container" class= "index">
-            <div class="row">
-                <div class="col-12">
-                    <h2>Welcome to Ditties, the songwriters' app for tracking song ideas.</h2>
-                    <form class="users">
-                        <fieldset>
-                            <legend>Sign in or Sign up!</legend>
-                            <label for="username">Username</label>
-                            <input type="text" id="username"><br>
-                            <label for="password">Password</label>
-                            <input type="password" id="password"><br>
-                            <input type="submit" value="Sign in!" id="signin"><br>
-                            <label for="signup">Don't have an account yet?</label><br>
-                            <input type="submit" id="signup" value="Sign Up">
-                        </fieldset>
-                        <fieldset>
-                            <legend>Can't commit just yet?</legend>
-                            <input type="submit" value="demo" id="demo">
-                        </fieldset>
-                    </form>
-                </div>
+        <div class="row">
+            <div class="col-12">
+                <header>
+                    <h1>Welcome to Ditties</h1>
+                    <h2>The songwriters' app for tracking song ideas...</h2>
+                </header>
+                <form class="users">
+                    <header>
+                        <h3>Sign in or Sign up!</h3>
+                    </header>
+                        <label for="username">Username</label><br>
+                        <input type="text" id="username" class="signin-fields"><br>
+                        <label for="password">Password</label><br>
+                        <input type="password" id="password" class="signin-fields"><br>
+                        <input type="submit" value="Sign in" id="signin" class="form-buttons"><br>
+                    <header>
+                        <h3>Don't have an account yet?</h3>
+                    </header>
+                        <input type="submit" id="signup" value="Sign up" class="form-buttons">
+                    <header>
+                        <h3>Can't commit just yet?</h3>
+                    </header>
+                        <button type="submit" value="demo" id="demo">
+                            <img class="button-pick" src="images/DemoPick.png">
+                            <img class="button-pick-hover" src="images/DemoPickHover.png">
+                        </button>
+                    </fieldset>
+                </form>
             </div>
-        </div>`
+        </div>
+    </div>`
     )
 }
 

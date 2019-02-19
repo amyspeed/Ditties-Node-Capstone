@@ -1,6 +1,6 @@
 html {
-    background-color: rgb(89, 89, 89);
-    /*font-family: ;*/
+    background-color: rgb(89, 89, 89);  
+    font-family: 'Roboto', sans-serif;
 }
 
 nav {
@@ -26,35 +26,27 @@ main {
     background-image: url('images/songwriting.jpg');
     background-repeat: no-repeat;
     background-size: cover;
-    /* background-position: right 80px; */
-    padding-bottom: 30px;
+    padding-bottom: 40px;
 }
 
-/* .index-header {
-    background-color: rgba(0, 0, 0, 0.523);
-    padding-top: 15px;
-    padding-left: 15px;
-    padding-bottom: 2px;
-    margin-left: 0;
-
-} */
-
-h2 {
+h1 {
     color: rgb(0, 0, 0);
     margin-bottom: 0;
     padding-top: 20px;
-    font-size: 20px;
+    font-size: 28px;
+    font-family: 'Gothic A1', sans-serif;
 }
 
-h3 {
+h2 {
     color: rgb(0, 0, 0);
     margin-top: 0;
-    margin-left: 40px;
+    margin-left: 50px;
     font-size: 15px;
 }
 
-h4 {
-    font-size: 20px;
+h3 {
+    font-size: 18px;
+    font-family: 'Gothic A1', sans-serif;
 }
 
 /* .readable {
@@ -63,8 +55,10 @@ h4 {
 
 form {
     text-align: center;
+    margin-top: 30px;
     margin-left: auto;
     margin-right: auto;
+    padding-top: 10px;
     padding-bottom: 30px;
     max-width: 400px;
     background-image: linear-gradient(rgba(255, 255, 255, 0.947), rgba(177, 177, 177, 0.824));
@@ -72,27 +66,41 @@ form {
     border-radius: 10px;
 }
 
-#username {
+.signup {
+    padding-top: 30px;
+}
+
+label {
+    font-size: 15px;
+}
+
+#username, #firstName, #lastName {
     margin-bottom: 10px;
 }
 
-#username, #password {
-    width: 200px;
+.signin-fields {
+    width: 250px;
+    font-size: 15px;
+    font-family: 'Roboto', sans-serif;
 }
 
-#signin {
+#signin, #register {
     margin-top: 20px;
 }
 
-#signin, #signup {
-    width: 200px;
+.form-buttons {
+    width: 250px;
+    padding-top: 3px;
+    padding-bottom: 3px;
     background-color: rgba(0, 0, 0, 0.824);
     color: white;
     border-radius: 5px 5px;
     font-size: 15px;
+    font-family: 'Roboto', sans-serif;
+    margin-bottom: 30px;
 }
 
-#signin:hover, #signup:hover, #signin:focus, #signup:focus {
+.form-buttons:hover, .form-buttons:focus {
     background-color: rgb(9, 220, 220);
     color: black;
 }

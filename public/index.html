@@ -7,7 +7,7 @@
     <title>Ditties | Songwriters' Notes</title>
     <link href="float-grid.css" rel="stylesheet" type="text/css" />
     <link href="main.css" rel="stylesheet" type="text/css" />
-    <!--Font Links here-->
+    <link href="https://fonts.googleapis.com/css?family=Gothic+A1:bold|Roboto:300" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
 </head>
 
@@ -20,26 +20,26 @@
     <main role="main">
         <div role="container" class= "index">
             <div class="row">
-                <div class="col-12 readable">
-                    <header class="index-header">
-                        <h2>Welcome to Ditties</h2>
-                        <h3>The songwriters' app for tracking song ideas</h3>
+                <div class="col-12">
+                    <header>
+                        <h1>Welcome to Ditties</h1>
+                        <h2>The songwriters' app for tracking song ideas...</h2>
                     </header>
                     <form class="users">
                         <header>
-                            <h4>Sign in or Sign up!</h4>
+                            <h3>Sign in or Sign up!</h3>
                         </header>
                             <label for="username">Username</label><br>
-                            <input type="text" id="username"><br>
+                            <input type="text" id="username" class="signin-fields"><br>
                             <label for="password">Password</label><br>
-                            <input type="password" id="password"><br>
-                            <input type="submit" value="Sign in" id="signin"><br>
+                            <input type="password" id="password" class="signin-fields"><br>
+                            <input type="submit" value="Sign in" id="signin" class="form-buttons"><br>
                         <header>
-                            <h4>Don't have an account yet?</h4>
+                            <h3>Don't have an account yet?</h3>
                         </header>
-                            <input type="submit" id="signup" value="Sign Up">
+                            <input type="submit" id="signup" value="Sign up" class="form-buttons">
                         <header>
-                            <h4>Can't commit just yet?</h4>
+                            <h3>Can't commit just yet?</h3>
                         </header>
                             <button type="submit" value="demo" id="demo">
                                 <img class="button-pick" src="images/DemoPick.png">
