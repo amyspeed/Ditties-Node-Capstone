@@ -74,9 +74,10 @@ function appendDash(allDitties, userAuth) {
         ` <div role="container" class="dashboard">
             <div class="row">
                 <div class="col-12">
-                    <h2>Hi (user's first name)! Let's get to tracking your Diddies.</h2>
+                    <h1>Hi (user's first name)!</h1>
+                    <h2>Let's get to tracking your Ditties...</h2>
                     <form id="new-song">
-                        <input type="submit" value="Create New Song">
+                        <input type="submit" value="Create New Song" class="form-buttons">
                     </form>
                 </div>
             </div>
@@ -84,7 +85,8 @@ function appendDash(allDitties, userAuth) {
             <section role="region">
                 <div class="row">
                     <div class="col-12">
-                        <header><h3>Your Amazing Song Ideas</h3>
+                        <header>
+                            <h3>Your Amazing Song Ideas:</h3>
                         </header>
                     </div>
                 </div>
@@ -101,8 +103,14 @@ function appendDash(allDitties, userAuth) {
 function displaySongs(allDitties, userAuth) {
     for (let i = 0; i < allDitties.length; i++) {
         $('.song-icons').append(
-            `<div>
-            <button class="title" value="${allDitties[i]._id}">${allDitties[i].title}<button>
+            `<div class="col-3">
+                <div class="box">
+                    <button type="submit" class="title" value="${allDitties[i]._id}">
+                        <img class="pick-dash" src="images/PickButton.png">
+                        <img class="pick-dash-hover" src="images/PickButtonHover.png">
+                        <h4 class="title-label">${allDitties[i].title}</h4>
+                    </button>
+                </div>
             </div>`
         );
     }
@@ -112,13 +120,18 @@ function displaySongs(allDitties, userAuth) {
 function appendSongForm() {
     $('main').append(
         `<div role="container" class="songform">
+            <nav>
+                <button type="submit" class="dash">
+                    <img id="logo" src="images/DittiesLogo.png">
+                </button>
+            </nav>
             <div class="row">
                 <div class="col-12 form-page">
                 <input type="submit" value="My Songs" class="dash">
-                    <h2>Let your song ideas come to life!</h2>
+                    <h1>Let your song ideas come to life!</h1>
                     <form class="song-form">
                         <fieldset>
-                            <legend>Fill in all inspired fields</legend>
+                            <legend><h3>Fill in all inspired fields</h3></legend>
                             <label for="title">Title</label>
                             <input type="text" id="title"><br>
                         
@@ -160,9 +173,9 @@ function appendSongForm() {
                         
                         
                             <br>
-                            <input type="submit" value="Save" id="save">
-                            <input type="submit" value="Clear Form" id="clear">
-                            <input type="submit" value="Delete Song" id="delete">
+                            <input class="song-form-buttons" type="submit" value="Save" id="save">
+                            <input class="song-form-buttons" type="submit" value="Clear Form" id="clear">
+                            <input class="song-form-buttons" type="submit" value="Delete Song" id="delete">
                     </form>
                 </div>
             </div>
@@ -184,20 +197,24 @@ function appendContent(count) {
             <option value="instrumental">Instrumental</option>
         </select><br>
 
-        <label for=chords>Chords</label>
+        <label for=chords${count}>Chords</label><br>
         <input type="text" id="chords${count}"><br>
 
-        <label for=lyrics>Lyrics</label>
-        <input type="text" id="lyrics${count}"><br>`
+        <label for=lyrics${count}>Lyrics</label><br>
+        <textarea id="lyrics${count}" rows="5" cols="50"></textarea><br>`
     )
 }
 
 function appendSong(thisSong) {
     $('main').append(
         `<div role="container" class= "song-page">
+            <nav>
+                <button type="submit" class="dash">
+                    <img id="logo" src="images/DittiesLogo.png">
+                </button>
+            </nav>    
             <div class="row">
                 <div class="col-12">
-                    <input type="submit" value="My Songs" class="dash">
                     <h2>${thisSong.title}</h2>
                     <p>Coauthor(s): ${thisSong.coauthors}<br>
                     Genre/Feel: ${thisSong.genreFeel}<br>
@@ -222,9 +239,8 @@ function appendSongContent(thisSong) {
         // console.log(thisSong.content[i].section);
         $('.song-content').append(
          `<p>Section ${thisSong.content[i].sectionId}: ${thisSong.content[i].section}<br>
-         <br>${thisSong.content[i].chords}<br>
-         ${thisSong.content[i].lyrics}
-         </p>`
+         <br>${thisSong.content[i].chords}</p>
+         <p class="textbox">${thisSong.content[i].lyrics}</p>`
         )
     }
 }
