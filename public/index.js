@@ -652,16 +652,9 @@ function handleEdit(userAuth, thisSong) {
         let countEdit = thisSong.content.length;
         handleSectionEdit(userAuth, thisSong, countEdit);
         handleSaveEdit(userAuth, thisSong, countEdit);
+        handleMySongsOff(userAuth);
     })
 }
-
-// function handleClearEdit(thisSong) {
-//     $('main').on('click', '#clear-edit', function(event) {
-//         event.preventDefault();
-//         $('.songform').remove();
-//         appendEditForm(thisSong);
-//     })
-// }
 
 function handleSectionEdit(userAuth, thisSong, countEdit) {
     $('main').on('click', '#section-edit', function(event) {
