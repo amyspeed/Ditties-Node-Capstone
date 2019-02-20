@@ -175,7 +175,7 @@ function appendSongForm() {
                             <br>
                             <input class="song-form-buttons" type="submit" value="Save" id="save">
                             <input class="song-form-buttons" type="submit" value="Clear Form" id="clear">
-                            <input class="song-form-buttons" type="submit" value="Delete Song" id="delete">
+                            <input class="song-form-buttons" type="submit" value="Delete Song" id="delete-new">
                     </form>
                 </div>
             </div>
@@ -464,7 +464,8 @@ function handleNewSong(userAuth) {
         handleSection();
         handleClear();
         handleMySongsOff(userAuth);
-        handleSave(userAuth);
+        handleSaveOff(userAuth);
+        handleDeleteNewOff(userAuth);
     })
 }
 
@@ -476,6 +477,13 @@ function handleSection() {
     });
 }
 
+function handleSaveOff(userAuth) {
+    $('#save').click(function(event) {
+        event.preventDefault();
+        $('main').off('click');
+        handleSave(userAuth);
+    })
+}
 
 function handleSave(userAuth) {
     $('main').on('click', '#save', function(event) {
@@ -531,6 +539,32 @@ function createSongObject(userAuth, contentArray) {
         console.log(song, JSON.stringify(song));
         $('.songform').remove();
         postDitty(userAuth, song);
+}
+
+function handleDeleteNewOff(userAuth) {
+    $('#delete-new').click(function(event) {
+        event.preventDefault();
+        $('main').off('click');
+        handleDeleteNew(userAuth);
+    })
+}
+
+function handleDeleteNew(userAuth) {
+    $('main').on('click', '#delete-new', function(event) {
+        event.preventDefault();
+        deleteNewConfirm(userAuth);
+    })
+}
+
+function deleteNewConfirm(userAuth) {
+    let deleteNewConfirm = confirm('Are you sure you want to delete this new Ditty?');
+    if( deleteNewConfirm == true ) {
+        $('main').empty();
+        getDitties(userAuth);
+    }
+    else {
+        return false;
+    }
 }
 
 function handleDeleteOff(userAuth, thisSong) {
