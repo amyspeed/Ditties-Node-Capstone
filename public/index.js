@@ -1,7 +1,5 @@
 'use strict';
 
-let count = 0;
-
 //---------All appended pages------------
 
 function appendSignUp() {
@@ -183,6 +181,9 @@ function appendSongForm() {
     )
 }
 
+
+let count = 0;
+
 function appendContent(count) {
     $('.content').append(
         `<br><label for="section">Section</label>
@@ -235,11 +236,11 @@ function appendSong(thisSong) {
                         </tr>   
                         <tr class="tSig">
                             <td></td>
-                            <td class="tSig-top" valign="bottom">${thisSong.timeSig.top}</td>
+                            <td class="tSig-top" valign="bottom">${sigTop(thisSong)}</td>
                         </tr>
                         <tr class="tSig">
                             <td class="right tSig-bot">Time Sig:</td>
-                            <td class="tSig-bot valign="bottom"">${thisSong.timeSig.bottom}</td>
+                            <td class="tSig-bot valign="bottom"">${sigBot(thisSong)}</td>
                         </tr>   
                         <tr>
                             <td class="right">Key:</td>
@@ -247,7 +248,7 @@ function appendSong(thisSong) {
                         </tr>
                         <tr>
                             <td class="right">Capo:</td>
-                            <td valign="bottom">${thisSong.capo}</td>
+                            <td valign="bottom">${capo(thisSong)}</td>
                         </tr>
                         <tr>
                             <td class="right">Strum/Picking Notes:</td>
@@ -522,6 +523,7 @@ function renderContent(userAuth) {
     createSongObject(userAuth, contentArray);
 }
 
+
 function createSongObject(userAuth, contentArray) {
     let song = {};
         song.title = $('#title').val();
@@ -716,6 +718,42 @@ function createEditSongObject(userAuth, songId, contentArray) {
         putDitty(userAuth, songId, song);
 }
 
+//---------remove Null values
+
+function capo(thisSong) {
+    let capo = thisSong.capo;
+    let capoNone = "";
+    if (capo === null) {
+        return capoNone;
+    }
+    else {
+        return capo;
+    }
+}
+
+function sigTop(thisSong) {
+    let sigTop = thisSong.timeSig.top;
+    let sigTopNone = "";
+    if (sigTop === null) {
+        return sigTopNone;
+    }
+    else {
+        return sigTop;
+    }
+}
+
+function sigBot(thisSong) {
+    let sigBot = thisSong.timeSig.bottom;
+    let sigBotNone = "";
+    if (sigBot === null) {
+        return sigBotNone;
+    }
+    else {
+        return sigBot;
+    }
+}
+
+
 //----------User requests----------
 
 function login(user) {
@@ -874,10 +912,9 @@ function postDitty(userAuth, song) {
         }
         throw new Error(response.statusText);
     })
-    .then(thisSong =>
-        getNewSongId(userAuth, thisSong))
-    // .then(thisSong =>
-    //     callSongFunctions(allDitties, userAuth, thisSong))
+    .then(thisSong => {
+        getNewSongId(userAuth, thisSong)
+    })
     .catch(err => {
         console.log(err)
     });
