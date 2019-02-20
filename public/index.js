@@ -490,7 +490,7 @@ function handleSave(userAuth) {
 }
 
 function saveAlert(userAuth) {
-    let noSaveConfirm = confirm('A title is a required for saving. Would you like to leave this page without saving?');
+    let noSaveConfirm = confirm('A title is a required to save. Would you like to LEAVE this page WITHOUT saving?');
     if( noSaveConfirm == true ) {
         $('main').empty();
         getDitties(userAuth);
