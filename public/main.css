@@ -90,7 +90,8 @@ label {
     margin-top: 20px;
 }
 
-.form-buttons, .song-form-buttons, .new-section {
+.form-buttons, .song-form-buttons, 
+.new-section, #section-edit {
     padding-top: 4px;
     padding-bottom: 4px;
     border-radius: 5px 5px;
@@ -103,7 +104,7 @@ label {
     color: white;
 }
 
-.song-form-buttons, .new-section {
+.song-form-buttons, .new-section, #section-edit {
     width: 150px;
 }
 
@@ -112,13 +113,13 @@ label {
     margin-bottom: 30px;
 }
 
-.new-section {
+.new-section, #section-edit {
     margin-bottom: 20px;
 }
 
 .form-buttons:hover, .form-buttons:focus,
 .song-form-buttons:hover, .song-form-buttons:focus,
-.new-section:hover {
+.new-section:hover, #section-edit:hover {
     background-color: rgb(9, 220, 220);
     color: black;
 }
@@ -212,7 +213,7 @@ label {
     background-color: rgb(89, 89, 89);
 }
 
-.songform {
+.songform, .song-page {
     background-color: rgb(230, 230, 230)
 }
 
@@ -229,6 +230,56 @@ fieldset{
 
 textarea, .textbox {
     white-space: pre-wrap;
+    width: 25em;
+}
+
+table {
+    background-color: white;
+    /* border: 1px groove rgb(155, 155, 155); */
+    border-radius: 10px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 30px;
+    width: 100%;
+    max-width: 650px;
+    font-family: 'Gothic A1', sans-serif;
+    font-size: 13px;
+    line-height: 2;
+}
+
+.right {
+    text-align: right;
+    font-family: 'Roboto', sans-serif;
+}
+
+.tSig {
+    line-height: .75;
+}
+
+.tSig-top {
+    padding-top: 10px;
+}
+
+.tSig-bot {
+    padding-bottom: 10px;
+}
+
+.section {
+    padding-top: 20px;
+}
+
+.textbox {
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.5;
+}
+
+.edit-delete {
+    text-align: center;
+    margin-top: 15px;
+    margin-bottom: 0px;
 }
 
 footer {

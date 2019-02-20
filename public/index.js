@@ -215,19 +215,54 @@ function appendSong(thisSong) {
             </nav>    
             <div class="row">
                 <div class="col-12">
-                    <h2>${thisSong.title}</h2>
-                    <p>Coauthor(s): ${thisSong.coauthors}<br>
-                    Genre/Feel: ${thisSong.genreFeel}<br>
-                    Speed: ${thisSong.speed}<br>
-                    Key: ${thisSong.key} Capo: ${thisSong.capo}<br>
-                    Time Signature: ${thisSong.timeSig.top}/${thisSong.timeSig.bottom}<br>
-                    Strum Notes: ${thisSong.strum}<br>
-                    Other Misc. Notes: ${thisSong.notes}<br></p>
-                    <div class="song-content">
+                    <h1>${thisSong.title}</h1>
+                    <div class="edit-delete">
+                        <input type="submit" value="Edit Song" id="edit" class="song-form-buttons">
+                        <input type="submit" value="Delete Song" id="delete" class="song-form-buttons">
                     </div>
-                    <input type="submit" value="Edit Song" id="edit">
-                    <input type="submit" value="Delete Song" id="delete">
-                    <input type="submit" value="My Songs" class="dash">
+                    <table>
+                        <tr>
+                            <td class="right">Coauthor(s):</td>
+                            <td valign="bottom">${thisSong.coauthors}</td>
+                        </tr>
+                        <tr>
+                            <td class="right">Genre/Feel:</td>
+                            <td valign="bottom">${thisSong.genreFeel}</td>
+                        </tr>
+                        <tr>
+                            <td class="right">Speed:</td>
+                            <td valign="bottom">${thisSong.speed}</td>
+                        </tr>   
+                        <tr class="tSig">
+                            <td></td>
+                            <td class="tSig-top" valign="bottom">${thisSong.timeSig.top}</td>
+                        </tr>
+                        <tr class="tSig">
+                            <td class="right tSig-bot">Time Sig:</td>
+                            <td class="tSig-bot valign="bottom"">${thisSong.timeSig.bottom}</td>
+                        </tr>   
+                        <tr>
+                            <td class="right">Key:</td>
+                            <td valign="bottom">${thisSong.key}</td>
+                        </tr>
+                        <tr>
+                            <td class="right">Capo:</td>
+                            <td valign="bottom">${thisSong.capo}</td>
+                        </tr>
+                        <tr>
+                            <td class="right">Strum/Picking Notes:</td>
+                            <td valign="bottom">${thisSong.strum}</td>
+                        </tr>
+                        <tr>
+                            <td class="right">Other Misc. Notes:</td>
+                            <td valign="bottom">${thisSong.notes}</td>
+                        </tr>
+            
+                        <tbody class="song-content">
+
+                        </tbody>
+
+                    </table>
                 </div>
             </div>
         </div>`
@@ -238,9 +273,18 @@ function appendSongContent(thisSong) {
     for(let i=0; i<thisSong.content.length; i++){
         // console.log(thisSong.content[i].section);
         $('.song-content').append(
-         `<p>Section ${thisSong.content[i].sectionId}: ${thisSong.content[i].section}<br>
-         <br>${thisSong.content[i].chords}</p>
-         <p class="textbox">${thisSong.content[i].lyrics}</p>`
+         `<tr>
+            <td class="right section">Section ${thisSong.content[i].sectionId}:</td>
+            <td class="section valign="bottom"">${thisSong.content[i].section}</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>${thisSong.content[i].chords}</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="textbox">${thisSong.content[i].lyrics}</td>
+        </tr>`
         )
     }
 }
@@ -248,13 +292,18 @@ function appendSongContent(thisSong) {
 function appendEditForm(thisSong) {
     $('main').append(
         `<div role="container" class="songform">
+            <nav>
+                <button type="submit" class="dash">
+                    <img id="logo" src="images/DittiesLogo.png">
+                </button>
+            </nav>
             <div class="row">
                 <div class="col-12 form-page">
                     <input type="submit" value="My Songs" class="dash">
-                    <h2>Let your song ideas come to life!</h2>
+                    <h1>Give this Ditty Some Love!</h1>
                     <form class="song-form">
                         <fieldset>
-                            <legend>Fill in all inspired fields</legend>
+                            <legend><h3>Fill in all inspired fields</h3></legend>
                             <label for="title">Title</label>
                             <input value="${thisSong.title}" type="text" id="title"><br>
                         
@@ -291,13 +340,14 @@ function appendEditForm(thisSong) {
                             <input value="${thisSong.notes}" type="text" id="notes"><br>
                         
                             <div class="content">
+                            
                             </div>   
                                 <input type="submit" value="create section" id="section-edit">
                         
                         
                             <br>
-                            <input type="submit" value="Save" id="save-edit">
-                            <input type="submit" value="Delete Song" id="delete">
+                            <input class="song-form-buttons" type="submit" value="Save" id="save-edit">
+                            <input class="song-form-buttons" type="submit" value="Delete Song" id="delete">
                     </form>
                 </div>
             </div>
@@ -321,11 +371,11 @@ function appendEditContent(thisSong) {
                 <option value="instrumental">Instrumental</option>
             </select><br>
     
-            <label for=chords>Chords</label>
+            <label for=chords${i}>Chords</label>
             <input value="${thisSong.content[i].chords}" type="text" id="chords${i}"><br>
     
-            <label for=lyrics>Lyrics</label>
-            <input value="${thisSong.content[i].lyrics}" type="text" id="lyrics${i}"><br>`
+            <label for=lyrics${i}>Lyrics</label>
+            <textarea id="lyrics${i}" rows="5" cols="50">${thisSong.content[i].lyrics}</textarea><br>`
         )
     }
 }
@@ -344,11 +394,11 @@ function appendMoreContent(countEdit) {
             <option value="instrumental">Instrumental</option>
         </select><br>
 
-        <label for=chords>Chords</label>
+        <label for=chords${countEdit}>Chords</label><br>
         <input type="text" id="chords${countEdit}"><br>
 
-        <label for=lyrics>Lyrics</label>
-        <input type="text" id="lyrics${countEdit}"><br>`
+        <label for=lyrics${countEdit}>Lyrics</label><br>
+        <textarea id="lyrics${countEdit}" rows="5" cols="50"></textarea><br>`
     )
 }
 
