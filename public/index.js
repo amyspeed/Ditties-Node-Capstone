@@ -423,7 +423,6 @@ function handleDemo() {
         let user = {};
         user.username = 'demo';
         user.password = 'Password123';
-        console.log(JSON.stringify(user));
         login(user);
 
     })
@@ -519,7 +518,6 @@ function renderContent(userAuth) {
             contentObject.lyrics = $(`#lyrics${i}`).val()
         contentArray.push(contentObject);
     }
-    console.log(contentArray);
     createSongObject(userAuth, contentArray);
 }
 
@@ -538,7 +536,6 @@ function createSongObject(userAuth, contentArray) {
         song.timeSig.top = $('#timeSig-top').val();
         song.timeSig.bottom = $('#timeSig-bottom').val();
         song.content = contentArray;
-        console.log(song, JSON.stringify(song));
         $('.songform').remove();
         postDitty(userAuth, song);
 }
@@ -650,7 +647,6 @@ function handleEdit(userAuth, thisSong) {
         $('.song-page').remove();
         appendEditForm(thisSong);
         appendEditContent(thisSong);
-        // handleClearEdit(thisSong);
         let countEdit = thisSong.content.length;
         handleSectionEdit(userAuth, thisSong, countEdit);
         handleSaveEdit(userAuth, thisSong, countEdit);
@@ -694,7 +690,6 @@ function renderEditContent(userAuth, songId, countEdit) {
             contentObject.lyrics = $(`#lyrics${i}`).val()
         contentArray.push(contentObject);
     }
-    console.log(contentArray);
     createEditSongObject(userAuth, songId, contentArray);
 }
 
@@ -713,7 +708,6 @@ function createEditSongObject(userAuth, songId, contentArray) {
         song.timeSig.top = $('#timeSig-top').val();
         song.timeSig.bottom = $('#timeSig-bottom').val();
         song.content = contentArray;
-        console.log(song, JSON.stringify(song));
         $('.songform').remove();
         putDitty(userAuth, songId, song);
 }
@@ -757,8 +751,7 @@ function sigBot(thisSong) {
 //----------User requests----------
 
 function login(user) {
-//change fetch URL for deployment:
-    fetch(/*'http://localhost:8080/api/auth/login' || */'/api/auth/login', {
+    fetch(/*'http://localhost:8080/api/auth/login'*/'/api/auth/login', {
         method: "POST",
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(user) 
@@ -780,12 +773,11 @@ function bearerToken(responseJsonAuth) {
     console.log(responseJsonAuth);
     const userAuth = responseJsonAuth.authToken;
     getDitties(userAuth);
-    console.log(userAuth);
     $('main').empty();
 }
 
 function register(newUser) {
-    fetch(/*'http://localhost:8080/api/users' || */'/api/users', {
+    fetch(/*'http://localhost:8080/api/users'*/'/api/users', {
         method: "POST",
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newUser) 
@@ -813,7 +805,7 @@ function userObject(newUser) {
 
 //--GET
 function getDitties(userAuth) {
-    fetch(/*'http://localhost:8080/ditties' || */'/ditties', {
+    fetch(/*'http://localhost:8080/ditties'*/'/ditties', {
         method: 'GET',
         headers: {
             'Authorization': `Bearer ${userAuth}`
@@ -839,7 +831,7 @@ function callDashFunctions(allDitties, userAuth) {
 
 //--GET by ID
 function getDittyById(songId, userAuth) {
-    fetch(/*`http://localhost:8080/ditties/${songId}` || */`/ditties/${songId}`, {
+    fetch(/*`http://localhost:8080/ditties/${songId}`*/`/ditties/${songId}`, {
         method: 'GET',
         headers: {
             'Authorization': `Bearer ${userAuth}`
@@ -870,7 +862,7 @@ function callSongFunctions(userAuth, thisSong){
 function deleteDitty(userAuth, thisSong) {
     let songId = thisSong._id;
     console.log(songId);
-    fetch(/*`http://localhost:8080/ditties/${songId}` || */`/ditties/${songId}`, {
+    fetch(/*`http://localhost:8080/ditties/${songId}`*/`/ditties/${songId}`, {
         method: "DELETE",
         headers: {
             'Authorization': `Bearer ${userAuth}`
@@ -897,7 +889,7 @@ function getNewDitties(userAuth) {
 //--POST
 function postDitty(userAuth, song) {
     console.log(userAuth);
-    fetch(/*'http://localhost:8080/ditties' || */'/ditties', {
+    fetch(/*'http://localhost:8080/ditties'*/'/ditties', {
         method: 'POST',
         headers: {
             'Authorization': `Bearer ${userAuth}`,
@@ -927,7 +919,7 @@ function getNewSongId(userAuth, thisSong) {
 
 //--PUT
 function putDitty(userAuth, songId, song) {
-    fetch(/*`http://localhost:8080/ditties/${songId}` ||*/`/ditties/${songId}`, {
+    fetch(/*`http://localhost:8080/ditties/${songId}`*/`/ditties/${songId}`, {
         method: "PUT",
         headers: {
             'Authorization': `Bearer ${userAuth}`,
