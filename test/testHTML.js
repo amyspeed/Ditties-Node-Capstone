@@ -28,47 +28,4 @@ describe('Open HTML pages', function() {
                 });
         });
     });
-
-    describe('Open page to create new user credentials', function() {
-        it('should open signup.html', function() {
-            return chai
-                .request(app)
-                .get('/signup.html')
-                .then(function(res) {
-                    expect(res).to.have.status(200);
-                });
-        });
-    });
-
-    describe('Open user dashboard', function() {
-        it('should open dash.html', function() {
-            return chai
-                .request(app)
-                .get('/dash.html')
-                .then(function(res) {
-                    expect(res).to.have.status(200);
-                });
-        });
-    });
-
-    describe('Open song form', function() {
-        it ('should open songform.html', function() {
-            return chai
-                .request(app)
-                .get('/songform.html', function(res) {
-                    expect(res).to.have.status(200);
-                });
-        });
-    });
-
-    describe('Open song page', function() {
-        it ('should open song.html', function() {
-            return chai
-                .request(app)
-                .get('/song.html', function(res) {
-                    expect(res).to.have.status(200);
-                });
-        });
-    });
-
 });
