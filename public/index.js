@@ -480,8 +480,24 @@ function handleSection() {
 function handleSave(userAuth) {
     $('main').on('click', '#save', function(event) {
         event.preventDefault();
-        renderContent(userAuth);
+        if ($('#title').val() == false) {
+            return saveAlert(userAuth);
+        }
+        else {
+            renderContent(userAuth);
+        }
     })
+}
+
+function saveAlert(userAuth) {
+    let noSaveConfirm = confirm('A title is a required for saving. Would you like to leave this page without saving?');
+    if( noSaveConfirm == true ) {
+        $('main').empty();
+        getDitties(userAuth);
+    }
+    else {
+        return false;
+    }
 }
 
 function renderContent(userAuth) {
