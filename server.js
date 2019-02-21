@@ -133,7 +133,6 @@ app.delete('/ditties/:id', jwtAuth, (req, res) => {
     Dittie
         .findOne({_id: req.params.id})
         .then(ditty => {
-            console.log(ditty)
             if (ditty === null) {
                 return res.status(404).end();
             }
