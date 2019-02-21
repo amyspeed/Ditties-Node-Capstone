@@ -127,12 +127,4 @@ router.post('/', jsonParser, (req, res) => {
         });
 });
 
-//For better security, delete this block after testing
-// router.get('/', (req, res) => {
-//     return User
-//     .find()
-//     .then(users => res.json(users.map(user => user.serialize())))
-//     .catch(err => res.status(500).json({message: 'Internal server error'}));
-// });
-
 module.exports = { router };
