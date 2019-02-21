@@ -561,7 +561,7 @@ function handleDeleteOn(userAuth, thisSong) {
 }
 
 function getConfirmation(userAuth, thisSong) {
-    let deleteConfirm = confirm('Are you sure you want to perminently delete this Ditty?');
+    let deleteConfirm = confirm('Are you sure you want to permanently delete this Ditty?');
     if( deleteConfirm == true ) {
         deleteDitty(userAuth, thisSong);
     }
