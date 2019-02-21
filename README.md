@@ -1,11 +1,11 @@
 # Ditties | The Songwriter's App
 
-Where useres can create and track their amazing song ideas.
+Where users can create and track their amazing song ideas.
 
 [See the live app here](https://cryptic-atoll-45082.herokuapp.com/)
 
 ## Landing Page
-Users can log into their existing account, access a Demo account, or link to the registration page to sign up. Once logged in, users are taken to their dashboard.
+Users can log into their existing account, access a Demo account, or link to the registration page to sign up. Once logged in, users are taken to the Dashboard.
 
 ![Landing Page](/public/images/ScreenShots/Landing.png)
 
@@ -22,7 +22,7 @@ Once logged in, users are taken to their dashboard. They are greeted by first na
 ## Song Form Page
 Users are directed here to create a new "ditty." The only requirement is a title. This allows the user to be free to take note of any and all song ideas as they come. Every songwriter has a different process, and each song is inspired differently. To create a new section in the song, a button appends more form fields. To return to the Dashboard without saving, the user can click anywhere on the navigation bar. If the user selects "save" without a title, they are alerted with a confirmation. They can choose to exit to the Dashboard without saving or return to finish the form. They can also select "delete," and, after a confirmation alert, they will return to the Dashboard. They can clear the form and start over. If the user selects "save" with a filled title, they are directed to the Song Page for viewing.
 
-![Song Form Page](public/images/ScreenShots/Song Form.png) ![Song Form Expanded](public/images/ScreenShots/Song Form Expanded.png)
+![Song Form Page](public/images/ScreenShots/SongForm.png) ![Song Form Expanded](public/images/ScreenShots/SongFormExpanded.png)
 
 ## Song Page
 Users view one "ditty" at a time from this page. They can return to the Dashboard by clicking anywhere on the navigation bar. Users can choose to delete the song. After a confirmation alert they are directed to their Dashboard, where the deleted song will be missing. Users can choose to edit the song. When they click "edit" they are directed to a new version of the Song Form Page with pre-filled fields.
