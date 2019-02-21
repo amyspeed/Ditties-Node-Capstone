@@ -29,43 +29,6 @@ function appendSignUp() {
     )
 }
 
-function appendIndex() {
-    $('main').append(
-        `<div role="container" class= "index">
-        <div class="row">
-            <div class="col-12">
-                <header>
-                    <h1>Welcome to Ditties</h1>
-                    <h2>The songwriters' app for tracking song ideas...</h2>
-                </header>
-                <form class="users">
-                    <header>
-                        <h3>Sign in or Sign up!</h3>
-                    </header>
-                        <label for="username">Username</label><br>
-                        <input type="text" id="username" class="signin-fields"><br>
-                        <label for="password">Password</label><br>
-                        <input type="password" id="password" class="signin-fields"><br>
-                        <input type="submit" value="Sign in" id="signin" class="form-buttons"><br>
-                    <header>
-                        <h3>Don't have an account yet?</h3>
-                    </header>
-                        <input type="submit" id="signup" value="Sign up" class="form-buttons">
-                    <header>
-                        <h3>Can't commit just yet?</h3>
-                    </header>
-                        <button type="submit" value="demo" id="demo">
-                            <img class="button-pick" src="images/DemoPick.png">
-                            <img class="button-pick-hover" src="images/DemoPickHover.png">
-                        </button>
-                    </fieldset>
-                </form>
-            </div>
-        </div>
-    </div>`
-    )
-}
-
 function appendDash(allDitties, userAuth) {
     console.log(allDitties);
     $('main').append(
@@ -451,8 +414,7 @@ function handleRegister() {
 function handleHaveAccount() {
     $('main').on('click', '#sign-in-page', function(event) {
         event.preventDefault();
-        // $('.register').remove();
-        // appendIndex();
+        //reload index
         window.location.reload();
     })
 }
