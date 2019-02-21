@@ -451,8 +451,9 @@ function handleRegister() {
 function handleHaveAccount() {
     $('main').on('click', '#sign-in-page', function(event) {
         event.preventDefault();
-        $('.register').remove();
-        appendIndex();
+        // $('.register').remove();
+        // appendIndex();
+        window.location.reload();
     })
 }
 
