@@ -406,7 +406,6 @@ function handleRegister() {
 }
 
 function evalPassword() {
-    console.log($('#password').val().length);
     if($('#password').val().length < 10) {
         return passwordAlert()
     }
