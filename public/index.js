@@ -591,7 +591,6 @@ function handleSongButtonsOn(userAuth){
         event.preventDefault();
         let songId = $(this).val();
         $('.dashboard').remove();
-        console.log(songId);
         getDittyById(songId, userAuth);
     });
 }
@@ -644,7 +643,6 @@ function handleSaveEdit(userAuth, thisSong, countEdit) {
 
 function renderEditContent(userAuth, songId, countEdit) {
     let contentArray = [];
-    console.log('countEdit '+countEdit);
     for (let i=0; i < countEdit; i++) {
         let contentObject = {};
             contentObject.sectionId = $(`#sectionId${i}`).val(),
@@ -733,7 +731,6 @@ function login(user) {
 }
 
 function bearerToken(responseJsonAuth) {
-    console.log(responseJsonAuth);
     const userAuth = responseJsonAuth.authToken;
     getDitties(userAuth);
     $('main').empty();
@@ -824,7 +821,6 @@ function callSongFunctions(userAuth, thisSong){
 //--DELETE
 function deleteDitty(userAuth, thisSong) {
     let songId = thisSong._id;
-    console.log(songId);
     fetch(/*`http://localhost:8080/ditties/${songId}`*/`/ditties/${songId}`, {
         method: "DELETE",
         headers: {
@@ -851,7 +847,6 @@ function getNewDitties(userAuth) {
 
 //--POST
 function postDitty(userAuth, song) {
-    console.log(userAuth);
     fetch(/*'http://localhost:8080/ditties'*/'/ditties', {
         method: 'POST',
         headers: {
