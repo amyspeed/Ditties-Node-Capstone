@@ -401,27 +401,31 @@ function handleSignUp() {
 function handleRegister() {
     $('main').on('click', '#register', function(event) {
         event.preventDefault();
-        let newUser = {};
-        newUser.username = $('#username').val();
-        newUser.password = evalPassword();
-        newUser.firstName = $('#firstName').val();
-        newUser.lastName = $('#lastName').val();
-        register(newUser);
+        evalPassword();
     })
 }
 
 function evalPassword() {
-    let password = $('#password').val();
+    console.log($('#password').val().length);
     if($('#password').val().length < 10) {
-        return password;
+        return passwordAlert()
     }
     else {
-        return passwordAlert()
+        return newUserObject()
     }
 }
 
 function passwordAlert() {
     alert('Your password must be at least 10 characters');
+}
+
+function newUserObject() {
+    let newUser = {};
+    newUser.username = $('#username').val();
+    newUser.password = $('#password').val();
+    newUser.firstName = $('#firstName').val();
+    newUser.lastName = $('#lastName').val();
+    register(newUser);
 }
 
 function handleHaveAccount() {
