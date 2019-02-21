@@ -30,7 +30,6 @@ function appendSignUp() {
 }
 
 function appendDash(allDitties, userAuth) {
-    console.log(allDitties);
     $('main').append(
         ` <div role="container" class="dashboard">
             <div class="row">
@@ -404,11 +403,25 @@ function handleRegister() {
         event.preventDefault();
         let newUser = {};
         newUser.username = $('#username').val();
-        newUser.password = $('#password').val();
+        newUser.password = evalPassword();
         newUser.firstName = $('#firstName').val();
         newUser.lastName = $('#lastName').val();
         register(newUser);
     })
+}
+
+function evalPassword() {
+    let password = $('#password').val();
+    if($('#password').val().length < 10) {
+        return password;
+    }
+    else {
+        return passwordAlert()
+    }
+}
+
+function passwordAlert() {
+    alert('Your password must be at least 10 characters');
 }
 
 function handleHaveAccount() {
