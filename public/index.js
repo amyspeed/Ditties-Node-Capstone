@@ -72,7 +72,7 @@ function appendDash(allDitties, userAuth) {
         ` <div role="container" class="dashboard">
             <div class="row">
                 <div class="col-12">
-                    <h1>Hi (user's first name)!</h1>
+                    <h1>Hi ${allDitties.firstName}!</h1>
                     <h2>Let's get to tracking your Ditties...</h2>
                     <form id="new-song">
                         <input type="submit" value="Create New Song" class="form-buttons">
@@ -98,7 +98,8 @@ function appendDash(allDitties, userAuth) {
     displaySongs(allDitties, userAuth);
 }
 
-function displaySongs(allDitties, userAuth) {
+function displaySongs(data, userAuth) {
+    let allDitties = data.ditties;
     for (let i = 0; i < allDitties.length; i++) {
         $('.song-icons').append(
             `<div class="col-3">
@@ -412,7 +413,6 @@ function handleLogIn() {
         let user = {};
         user.username = $('#username').val();
         user.password = $('#password').val();
-        console.log(JSON.stringify(user));
         login(user);
     })
 }

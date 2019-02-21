@@ -50,7 +50,7 @@ app.get('/ditties', jwtAuth, (req, res) => {
             ]
         })
         .then(ditties => {
-            res.json(ditties);//.map(ditty => ditty.serialize()));
+            res.json({ditties, firstName: req.user.firstName});//.map(ditty => ditty.serialize()));
         })
         .catch(err => {
             console.error(err);
