@@ -2,7 +2,7 @@
 
 Where users can create and track their amazing song ideas.
 
-[See the live app here](https://cryptic-atoll-45082.herokuapp.com/)
+[See the live app here](https://ditties.herokuapp.com/)
 
 ## Landing Page
 Users can log into their existing account, access a Demo account, or link to the registration page to sign up. Once logged in, users are taken to the Dashboard.
